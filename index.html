@@ -1,105 +1,27 @@
-<!-- index.html -->
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Manish Saroha</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f4f4f9;
-      color: #333;
-    }
+<section id="projects">
+  <h2>Projects</h2>
 
-    h1 {
-      color: #2c3e50;
-      font-size: 36px;
-      border-bottom: 2px solid #ccc;
-      padding-bottom: 10px;
-    }
+  <p><strong>C5I</strong></p>
+  <ul>
+    <li>Identified major visibility gaps and frequent late deliveries in the logistics chain, leading to operational inefficiencies and stakeholder dissatisfaction.</li>
+    <li>Tasked with building a data-driven solution to improve delivery prediction accuracy and optimize logistics performance.</li>
+    <li>Engineered machine learning models (XGBoost, LSTM) using over 3 years of historical delivery, weather, and traffic data to capture delay patterns.</li>
+    <li>Trained and validated models using hyperparameter tuning and time-series cross-validation to ensure generalization across regions and seasons.</li>
+    <li>Achieved 92% delivery prediction accuracy, directly contributing to a 15% reduction in delayed shipments within the first quarter of deployment.</li>
+    <li>Integrated real-time APIs for weather, traffic, and carrier data, refining dynamic ETA predictions and improving on-time delivery rates by 18%.</li>
+    <li>Developed interactive dashboards in Power BI and Tableau for real-time tracking, enabling operations teams to monitor order progress and proactively resolve delivery issues.</li>
+    <li>Improved stakeholder visibility across supply chain operations and accelerated decision-making using alert-based visual analytics and historical trend views.</li>
+  </ul>
 
-    h2 {
-      color: #34495e;
-      margin-top: 40px;
-      font-size: 28px;
-      border-bottom: 1px solid #ccc;
-      padding-bottom: 5px;
-    }
-
-    p {
-      font-size: 16px;
-      line-height: 1.6;
-      margin-bottom: 15px;
-    }
-
-    a {
-      color: #2980b9;
-      text-decoration: none;
-      margin-right: 10px;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    section {
-      background: #fff;
-      padding: 20px;
-      margin-top: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-
-    body > p {
-      margin-top: 20px;
-      margin-bottom: 30px;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Manish Saroha</h1>
-  <p>Data Scientist with 9+ years of experience...</p>
-
-  <!-- Example links in the resume -->
-  <p>
-    <a href="#projects">See My Projects</a> |
-    <a href="#skills">Skills</a> |
-    <a href="#contact">Contact</a>
-  </p>
-
-  <!-- Anchor targets -->
-  <section id="projects">
-    <h2>Projects</h2>
-    <p>C5I </p>
-     Addressedlatedeliveries andvisibility gaps by building machinelearning models
- (XGBoost,LSTM)trainedonhistoricaldelivery,weather,andtrafficdata,achieving
- 92%delivery prediction accuracy and reducing delays by 15%.
- • Enhanceddelivery time estimations by integrating real-time weather, traffic, and
- carrier data, improving on-time delivery rates by 18%.
- • Created Power BI/Tableau dashboards for real-time order tracking and issue de
-tection, enabling faster resolution and improved stakeholder visibility
-    <p> Landis + Gyr</p>
-     Built a predictive system to monitor network quality using MOS estimation, ad
-dressing poor visibility into user experience.
- • Achieved 94% accuracy with machine learning models, optimizing Random For
-est, XGBoost, and LSTMforrobustness.
- • IntegratedMOSpredictionsintoreal-timedashboardsforproactiveissuetracking
- andresolution.
- • Reducedcustomercomplaintsby22%andimprovedSLAadherencethroughearly
- detection of service degradation.
-    
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <p>Python, Machine Learning, GenAI...</p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: manishsaroha1@yahoo.com</p>
-  </section>
-
-</body>
-</html>
+  <p><strong>Landis + Gyr</strong></p>
+  <ul>
+    <li>Faced with poor visibility into network quality and rising user complaints, the organization needed a predictive system to assess user experience.</li>
+    <li>Assigned to design a machine learning solution that could estimate Mean Opinion Scores (MOS) in real-time to evaluate perceived audio quality.</li>
+    <li>Collected and preprocessed vast network data including jitter, latency, packet loss, and bandwidth parameters for supervised learning models.</li>
+    <li>Built and evaluated models using Random Forest, XGBoost, and LSTM; selected the optimal approach based on accuracy, speed, and robustness under changing conditions.</li>
+    <li>Achieved 94% model accuracy in predicting MOS, significantly improving the accuracy of network quality estimations used by NOC teams.</li>
+    <li>Integrated the model into a real-time monitoring system, pushing predictions into a centralized dashboard used by engineers and customer service reps.</li>
+    <li>Enabled proactive identification and resolution of potential network degradations before user impact, shifting the organization from reactive to predictive operations.</li>
+    <li>Reduced customer complaints by 22% and improved SLA compliance by enabling faster resolution of service disruptions and anomalies.</li>
+  </ul>
+</section>
