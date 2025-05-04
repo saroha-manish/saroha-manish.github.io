@@ -8,7 +8,7 @@
 /* Body and general layout */
 body {
     font-family: Arial, sans-serif;
-    background-color: #e0f7fa;
+    background-color: #e0f7fa;  /* Light blue background */
     color: #333;
     line-height: 1.6;
     padding: 20px;
@@ -17,7 +17,7 @@ body {
 .container {
     max-width: 900px;
     margin: 0 auto;
-    background-color: #e0f7fa;
+    background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -27,14 +27,14 @@ h1 {
     text-align: center;
     margin-bottom: 30px;
     font-size: 28px;
-    color: #4CAF50;
+    color: #0277bd;  /* Darker blue for title */
 }
 
 h2 {
     font-size: 24px;
     color: #333;
     margin-bottom: 10px;
-    border-bottom: 2px solid #e0f7fa;
+    border-bottom: 2px solid #0277bd;  /* Blue border */
     padding-bottom: 5px;
 }
 
@@ -53,5 +53,5 @@ ul li {
 
 strong {
     font-weight: bold;
-    color:  #e0f7fa;
+    color: #0277bd;  /* Darker blue for important text */
 }
