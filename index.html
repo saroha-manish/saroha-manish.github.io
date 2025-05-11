@@ -72,3 +72,68 @@
     </div>
 </body>
 </html>
+
+
+
+<section>
+    <h1>Landis+Gyr Project - QoE Monitoring with MOS Estimation</h1>
+
+    <section>
+        <h2>Project Overview</h2>
+        <p>This project at Landis+Gyr aimed to enhance network service quality by improving visibility into user experience and proactively detecting network issues. A machine learning-based system was developed to estimate Mean Opinion Score (MOS), allowing real-time monitoring of Quality of Experience (QoE) and enabling early detection of service degradation.</p>
+    </section>
+
+    <section>
+        <h2>Key Features</h2>
+        <ul>
+            <li><strong>MOS Prediction</strong>: Developed a predictive model achieving 94% accuracy in estimating MOS for network sessions.</li>
+            <li><strong>Model Optimization</strong>: Tuned and compared multiple regression algorithms including Random Forest, XGBoost, and LSTM for optimal performance.</li>
+            <li><strong>Real-Time Dashboards</strong>: Integrated predictions into operational dashboards to monitor QoE in real time and trigger alerts for degradations.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Technologies and Tools</h2>
+        <ul>
+            <li><strong>Programming Languages</strong>: Python</li>
+            <li><strong>Machine Learning Libraries</strong>: Scikit-learn, XGBoost, TensorFlow</li>
+            <li><strong>Data Processing</strong>: Pandas, NumPy</li>
+            <li><strong>Visualization</strong>: Plotly, Dash</li>
+            <li><strong>Deployment</strong>: Docker for scalable service deployment</li>
+            <li><strong>Monitoring Tools</strong>: Grafana for dashboard integration and alerting</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Problem Statement</h2>
+        <p>Lack of real-time visibility into user experience and delays in detecting network issues led to reduced service quality and increased customer complaints. Traditional monitoring tools failed to capture subjective QoE indicators like MOS, limiting proactive response capabilities.</p>
+    </section>
+
+    <section>
+        <h2>Solution Approach</h2>
+        <p>Collected historical network performance metrics and user feedback to train supervised learning models capable of estimating MOS. Multiple models were evaluated and optimized for accuracy and robustness, and the final solution was integrated into dashboards with real-time monitoring capabilities. Alerts were configured to flag degradation proactively.</p>
+    </section>
+
+    <section>
+        <h2>Results</h2>
+        <ul>
+            <li><strong>94% accuracy</strong> in MOS estimation, enabling reliable QoE tracking.</li>
+            <li><strong>22% reduction</strong> in customer complaints due to early issue detection.</li>
+            <li>Improved SLA compliance and increased user satisfaction through proactive network management.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Challenges</h2>
+        <p>Dealing with subjective QoE labels required data cleaning and balancing techniques. Integrating predictions with existing dashboards and ensuring low-latency model inference for real-time use posed architectural challenges, which were solved using Docker-based deployment and efficient API integration.</p>
+    </section>
+
+    <section>
+        <h2>Future Work</h2>
+        <p>Plan to incorporate real-time user feedback and expand the model to support anomaly detection for broader network health monitoring. Explore self-healing mechanisms based on MOS thresholds and automated issue resolution workflows.</p>
+    </section>
+
+    <footer>
+        <p>Project by [Your Name].</p>
+    </footer>
+</section>
