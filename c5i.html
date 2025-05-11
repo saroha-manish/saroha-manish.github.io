@@ -3,25 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>C5i - test Inventory Management Optimization</title>
+    <title>Inventory Management Optimization</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>C5i Project - Inventory Management Optimization</h1>
+        <h1>Inventory Management Optimization</h1>
 
         <section>
             <h2>Project Overview</h2>
-            <p>The C5i project focuses on optimizing inventory management and preventing stockouts by leveraging predictive modeling and time-series forecasting techniques. The goal was to build a system capable of forecasting stock levels based on historical data, external factors, and real-time data streams. The solution improved inventory accuracy by 30%, reducing stockouts by 25% and enhancing overall supply chain operations.</p>
+            <p>The project focused on developing a data-driven solution to ensure precise delivery scheduling, ensuring products arrive on the exact date 
+                promised, without any delays or premature deliveries. By utilizing predictive analytics, real-time data integration, and route optimization 
+                algorithms, the system provided accurate delivery dates, improving customer satisfaction and operational efficiency. The solution aimed to
+                address challenges such as unpredictable delivery times,
+                logistical constraints, and varying traffic conditions, ensuring reliable and timely deliveries.</p>
         </section>
 
         <section>
             <h2>Key Features</h2>
             <ul>
-                <li><strong>Time-Series Forecasting</strong>: Applied advanced time-series forecasting models to predict stock levels based on historical inventory data, demand patterns, and weather conditions.</li>
-                <li><strong>Real-Time Data Integration</strong>: Integrated external data streams (weather, promotions, and demand forecasts) to adjust predictions in real-time, ensuring more accurate forecasting.</li>
-                <li><strong>Improved Accuracy</strong>: Achieved 30% improvement in stock forecast accuracy, helping to optimize inventory management and reduce stockouts by 25%.</li>
-                <li><strong>Dynamic Adjustments</strong>: The system dynamically adjusts inventory predictions based on real-time data, ensuring up-to-date stock levels.</li>
+                <li><strong>Predictive Delivery Scheduling</strong>: Leveraged historical data and predictive algorithms to forecast accurate delivery dates.</li>
+                <li><strong>Real-Time Data Integration</strong>: Incorporated live traffic, weather, and route conditions to adjust delivery schedules dynamically.</li>
+                <li><strong>Timely Delivery Guarantees</strong>: Ensured that products arrived on the exact date promised, improving customer satisfaction.</li>
+                <li><strong>Customer Communication</strong>: Provided real-time updates to customers, ensuring transparency and enhancing satisfaction.</li>
             </ul>
         </section>
 
@@ -29,22 +33,30 @@
             <h2>Technologies and Tools</h2>
             <ul>
                 <li><strong>Programming Languages</strong>: Python</li>
-                <li><strong>Machine Learning Libraries</strong>: TensorFlow, Scikit-learn</li>
+                <li><strong>Machine Learning Libraries</strong>: Scikit-learn, TensorFlow</li>
                 <li><strong>Data Handling</strong>: Pandas, NumPy</li>
+                <li><strong>Real-Time Data Processing</strong>: Apache Kafka, Apache Spark</li>
+                 <li><strong>Visualization</strong>: Matplotlib, Seaborn, Tableau</li>
                 <li><strong>Databases</strong>: SQL for data storage and retrieval</li>
-                <li><strong>Containers</strong>: Docker for system deployment and scalability</li>
-                <li><strong>Development Tools</strong>: Jupyter Notebooks for exploratory data analysis and model development</li>
+                
             </ul>
         </section>
 
         <section>
             <h2>Problem Statement</h2>
-            <p>Traditional inventory management systems often fail to predict stock levels accurately, leading to frequent stockouts. This disrupts supply chains, increases operational costs, and negatively impacts customer satisfaction. The C5i project aimed to solve this problem by developing a predictive model to optimize inventory management.</p>
+            <p>Ensuring products are delivered on the exact promised date is a significant challenge, with delays or early deliveries
+                impacting customer satisfaction. Factors like traffic, weather, and unforeseen disruptions often affect delivery schedules. 
+                A reliable, data-driven solution is needed to predict precise delivery dates and adjust them dynamically in real time.
+                This would improve service reliability and enhance customer experience.</p>
         </section>
 
         <section>
             <h2>Solution Approach</h2>
-            <p>Collected and preprocessed historical inventory data, sales data, and external factors like weather and promotions. Built a time-series forecasting model using TensorFlow to predict future stock levels. Designed a system to integrate real-time data from various sources (weather, promotions, and demand forecasts) to continuously adjust predictions. The system was deployed using Docker for easy scalability and integration with existing inventory management systems.</p>
+            <p>ChatGPT said:
+The solution involves developing a predictive model using historical data to forecast accurate delivery dates. Real-time data streams,
+                such as traffic and weather conditions, are integrated to dynamically adjust delivery schedules. Machine learning algorithms are 
+                employed to continuously improve the accuracy of predictions. The system ensures on-time
+                deliveries by providing real-time updates and adjusting schedules based on changing conditions.</p>
         </section>
 
         <section>
@@ -58,17 +70,20 @@
 
         <section>
             <h2>Challenges</h2>
-            <p>Handling missing or noisy data required the implementation of advanced data preprocessing techniques. Integrating multiple data streams in real time required robust pipeline architecture, solved using Docker for deployment.</p>
+            <p>A key challenge was managing and integrating real-time data from various sources, such as traffic and weather, to dynamically 
+                adjust delivery schedules. Ensuring the system could handle unpredictable variables like road closures or severe weather disruptions 
+                required robust data processing and continuous model updates. Additionally, maintaining the accuracy of delivery predictions while scaling
+                the system for large volumes of deliveries was complex.
+                Balancing customer expectations with real-time adjustments also posed challenges in communication and transparency.</p>
         </section>
 
         <section>
             <h2>Future Work</h2>
-            <p>Expand the model to include real-time inventory tracking for even more accurate predictions. Integrate with ERP and supply chain management systems for seamless automation and decision-making.</p>
+            <p> Implementing algorithms to dynamically prioritize deliveries based on urgency, customer importance, or 
+                time-sensitive products, optimizing the use of available resources.</p>
         </section>
 
-        <footer>
-            <p>Project by [Your Name].</p>
-        </footer>
+        
     </div>
 </body>
 </html>
