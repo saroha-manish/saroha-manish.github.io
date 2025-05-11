@@ -7,21 +7,22 @@
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f4f6f9;
-      color: #333;
-      margin: 40px;
+      color: #2c3e50;
+      margin: 0;
+      padding: 0;
     }
 
     .container {
       max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 40px;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
     h1 {
-      font-size: 32px;
+      font-size: 36px;
       color: #2c3e50;
       margin-bottom: 10px;
     }
@@ -29,17 +30,21 @@
     h2 {
       font-size: 24px;
       color: #34495e;
-      margin-top: 25px;
+      margin-top: 30px;
       margin-bottom: 15px;
+      border-bottom: 2px solid #ecf0f1;
+      padding-bottom: 5px;
     }
 
     ul {
       padding-left: 20px;
+      list-style-type: disc;
     }
 
     li {
       margin-bottom: 12px;
       line-height: 1.6;
+      font-size: 16px;
     }
 
     a.back-link {
@@ -47,6 +52,7 @@
       margin-top: 30px;
       color: #2980b9;
       text-decoration: none;
+      font-size: 16px;
     }
 
     a.back-link:hover {
@@ -60,12 +66,25 @@
     <h1>Landis+Gyr</h1>
     <h2>Role: Data Scientist</h2>
 
+    <h2>Project Overview</h2>
     <ul>
       <li>Service quality was impacted due to poor visibility into user experience and delayed detection of network issues.</li>
-      <li>Developed a predictive system to monitor Quality of Experience (QoE) using MOS (Mean Opinion Score) estimation to enable proactive issue detection and network management.</li>
-      <li>Built and trained machine learning models—Random Forest, XGBoost, and LSTM—achieving 94% prediction accuracy for MOS, optimized for robustness across variable network conditions.</li>
-      <li>Integrated MOS predictions into live dashboards used by engineering teams for real-time tracking and early warning of network degradation.</li>
-      <li>Reduced customer complaints by 22% by enabling early alerts on service issues, and improved SLA adherence and user satisfaction through faster, data-driven resolution processes.</li>
+      <li>A predictive solution was required to proactively monitor and address Quality of Experience (QoE) degradation.</li>
+    </ul>
+
+    <h2>Key Features</h2>
+    <ul>
+      <li>Developed a predictive system using Mean Opinion Score (MOS) estimation for monitoring telecom network QoE in real time.</li>
+      <li>Built machine learning models (Random Forest, XGBoost, LSTM) achieving 94% accuracy in predicting network quality scores.</li>
+      <li>Integrated model outputs into live dashboards for continuous monitoring and alerting of service degradation.</li>
+      <li>Enabled early warnings that reduced customer complaints by 22% and improved SLA adherence significantly.</li>
+    </ul>
+
+    <h2>Technology & Tools</h2>
+    <ul>
+      <li>Python, Pandas, NumPy, Scikit-learn, XGBoost, TensorFlow/Keras (LSTM)</li>
+      <li>Power BI / Tableau for real-time dashboards</li>
+      <li>Regression modeling, time series forecasting, data pipeline integration</li>
     </ul>
 
     <a class="back-link" href="index.html">← Back to Resume</a>
