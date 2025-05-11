@@ -1,94 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Landis+Gyr – Data Scientist | Manish Saroha</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f6f9;
-      color: #2c3e50;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 40px auto;
-      background: #ffffff;
-      padding: 40px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      font-size: 36px;
-      color: #2c3e50;
-      margin-bottom: 10px;
-    }
-
-    h2 {
-      font-size: 24px;
-      color: #34495e;
-      margin-top: 30px;
-      margin-bottom: 15px;
-      border-bottom: 2px solid #ecf0f1;
-      padding-bottom: 5px;
-    }
-
-    ul {
-      padding-left: 20px;
-      list-style-type: disc;
-    }
-
-    li {
-      margin-bottom: 12px;
-      line-height: 1.6;
-      font-size: 16px;
-    }
-
-    a.back-link {
-      display: inline-block;
-      margin-top: 30px;
-      color: #2980b9;
-      text-decoration: none;
-      font-size: 16px;
-    }
-
-    a.back-link:hover {
-      text-decoration: underline;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C5i Project - Inventory Management Optimization</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="container">
+        <h1>LandisGyr Project - MOS prediction</h1>
 
-  <div class="container">
-    <h1>Landis+Gyr</h1>
-    <h2>Role: Data Scientist</h2>
+        <section>
+            <h2>Project Overview</h2>
+            <p>The project focused on developing a predictive system to estimate the Mean Opinion Score (MOS) for proactive network management. By optimizing machine learning models, it reduced customer complaints by 22% and improved overall service quality.</p>
+        </section>
 
-    <h2>Project Overview</h2>
-    <ul>
-      <li>Service quality was impacted due to poor visibility into user experience and delayed detection of network issues.</li>
-      <li>A predictive solution was required to proactively monitor and address Quality of Experience (QoE) degradation.</li>
-    </ul>
+        <section>
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>MOS Prediction</strong>:  Developed machine learning models to predict the Mean Opinion Score (MOS) for proactive network management, improving service quality monitoring.</li>
+                <li><strong>Real-Time Monitoring</strong>: Integrated MOS predictions into operational dashboards, enabling real-time tracking of network performance and early degradation alerts.</li>
+                <li><strong>Improved Accuracy</strong>: Achieved 94% accuracy in MOS predictions using advanced regression models like Random Forest, XGBoost, and LSTM.</li>
+                <li><strong>Proactive Alerts</strong>: Enabled early detection of potential network issues, reducing customer complaints by 22% and improving SLA adherence..</li>
+            </ul>
+        </section>
 
-    <h2>Key Features</h2>
-    <ul>
-      <li>Developed a predictive system using Mean Opinion Score (MOS) estimation for monitoring telecom network QoE in real time.</li>
-      <li>Built machine learning models (Random Forest, XGBoost, LSTM) achieving 94% accuracy in predicting network quality scores.</li>
-      <li>Integrated model outputs into live dashboards for continuous monitoring and alerting of service degradation.</li>
-      <li>Enabled early warnings that reduced customer complaints by 22% and improved SLA adherence significantly.</li>
-    </ul>
+        <section>
+            <h2>Technologies and Tools</h2>
+            <ul>
+                <li><strong>Programming Languages</strong>: Python</li>
+                <li><strong>Machine Learning Libraries</strong>: TensorFlow, Scikit-learn</li>
+                <li><strong>Data Handling</strong>: Pandas, NumPy</li>
+                <li><strong>Databases</strong>: SQL for data storage and retrieval</li>
+                <li><strong>Containers</strong>: Docker for system deployment and scalability</li>
+                <li><strong>Development Tools</strong>: Jupyter Notebooks for exploratory data analysis and model development</li>
+            </ul>
+        </section>
 
-    <h2>Technology & Tools</h2>
-    <ul>
-      <li>Python, Pandas, NumPy, Scikit-learn, XGBoost, TensorFlow/Keras (LSTM)</li>
-      <li>Power BI / Tableau for real-time dashboards</li>
-      <li>Regression modeling, time series forecasting, data pipeline integration</li>
-    </ul>
+        <section>
+            <h2>Problem Statement</h2>
+            <p>Traditional inventory management systems often fail to predict stock levels accurately, leading to frequent stockouts. This disrupts supply chains, increases operational costs, and negatively impacts customer satisfaction. The C5i project aimed to solve this problem by developing a predictive model to optimize inventory management.</p>
+        </section>
 
-    <a class="back-link" href="index.html">← Back to Resume</a>
-  </div>
+        <section>
+            <h2>Solution Approach</h2>
+            <p>Collected and preprocessed historical inventory data, sales data, and external factors like weather and promotions. Built a time-series forecasting model using TensorFlow to predict future stock levels. Designed a system to integrate real-time data from various sources (weather, promotions, and demand forecasts) to continuously adjust predictions. The system was deployed using Docker for easy scalability and integration with existing inventory management systems.</p>
+        </section>
 
+        <section>
+            <h2>Results</h2>
+            <ul>
+                <li><strong>30% improvement</strong> in forecasting accuracy, leading to better stock level predictions.</li>
+                <li><strong>25% reduction</strong> in stockouts, which increased operational efficiency and reduced inventory costs.</li>
+                <li>Real-time adjustments allowed for better decision-making, reducing overstocking and stockouts.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Challenges</h2>
+            <p>Handling missing or noisy data required the implementation of advanced data preprocessing techniques. Integrating multiple data streams in real time required robust pipeline architecture, solved using Docker for deployment.</p>
+        </section>
+
+        <section>
+            <h2>Future Work</h2>
+            <p>Expand the model to include real-time inventory tracking for even more accurate predictions. Integrate with ERP and supply chain management systems for seamless automation and decision-making.</p>
+        </section>
+
+        <footer>
+            <p>Project by [Your Name].</p>
+        </footer>
+    </div>
 </body>
 </html>
