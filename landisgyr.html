@@ -39,31 +39,33 @@
 
         <section>
             <h2>Problem Statement</h2>
-            <p>Traditional inventory management systems often fail to predict stock levels accurately, leading to frequent stockouts. This disrupts supply chains, increases operational costs, and negatively impacts customer satisfaction. The C5i project aimed to solve this problem by developing a predictive model to optimize inventory management.</p>
+            <p>Network service providers often struggle with limited visibility into real-time user experience and delayed detection of service degradation, leading to increased customer complaints and poor SLA adherence. There is a need for a predictive system that can accurately estimate the Mean Opinion Score (MOS) to proactively monitor Quality of Experience (QoE) and enable timely network issue resolution..</p>
         </section>
 
         <section>
             <h2>Solution Approach</h2>
-            <p>Collected and preprocessed historical inventory data, sales data, and external factors like weather and promotions. Built a time-series forecasting model using TensorFlow to predict future stock levels. Designed a system to integrate real-time data from various sources (weather, promotions, and demand forecasts) to continuously adjust predictions. The system was deployed using Docker for easy scalability and integration with existing inventory management systems.</p>
+            <p>torical network performance data, user interaction logs, and external factors affecting QoE, such as traffic load and latency. Built regression and deep learning models (Random Forest, XGBoost, LSTM) to predict MOS with high accuracy. Designed a system to integrate real-time network metrics for continuous monitoring and early issue detection. Deployed the solution using Docker for scalable integration with existing network management systems.</p>
         </section>
 
         <section>
             <h2>Results</h2>
             <ul>
-                <li><strong>30% improvement</strong> in forecasting accuracy, leading to better stock level predictions.</li>
-                <li><strong>25% reduction</strong> in stockouts, which increased operational efficiency and reduced inventory costs.</li>
-                <li>Real-time adjustments allowed for better decision-making, reducing overstocking and stockouts.</li>
+                <li>Achieved <strong>94% accuracy</strong> in predicting Mean Opinion Score (MOS) for network quality assessment.</li>
+                <li><strong>Reduced customer complaints by 22% </strong> through early detection of service degradation.</li>
+                <li>Improved SLA adherence and overall user satisfaction with real-time QoE monitoring.</li>
             </ul>
         </section>
 
         <section>
             <h2>Challenges</h2>
-            <p>Handling missing or noisy data required the implementation of advanced data preprocessing techniques. Integrating multiple data streams in real time required robust pipeline architecture, solved using Docker for deployment.</p>
+            <p>Handling incomplete and noisy network data was a significant challenge, necessitating the use of advanced preprocessing techniques and feature engineering to ensure model reliability. Maintaining high prediction accuracy in real time required continuous model tuning and validation to adapt to dynamic network conditions. Additionally, integrating the predictive system into existing operational dashboards called for a scalable and robust architecture, which was achieved through Docker-based deployment for seamless real-time monitoring.
+</p>
         </section>
 
         <section>
             <h2>Future Work</h2>
-            <p>Expand the model to include real-time inventory tracking for even more accurate predictions. Integrate with ERP and supply chain management systems for seamless automation and decision-making.</p>
+            <p>Enhance the model by incorporating additional real-time network metrics and user feedback for more precise MOS predictions.
+Integrate the system with broader network management and incident response platforms to enable fully automated QoE-driven decision-making and remediation.</p>
         </section>
 
         <footer>
