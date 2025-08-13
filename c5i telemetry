@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LandisGyr :Healthcare Device Insight Automation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Healthcare Device Insight Automation</h1>
+
+        <section>
+            <h2>Project Overview</h2>
+            <p>This project involved the development of a Natural Language Generation (NLG) engine to convert complex device analytics 
+into human-readable insights for non-technical stakeholders in the healthcare industry. Focused on equipment like MRI and CT scan machines,
+  the system extracted descriptive insights from raw data and used large language models (LLMs) to generate context-aware narratives. 
+  These narratives were displayed on a Power BI dashboard, allowing stakeholders to gain actionable information by simply hovering over data points. 
+The solution streamlined decision-making and improved communication between technical teams and business users..</p>
+        </section>
+
+        <section>
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Descriptive Insight Extraction:</strong>: Parsed raw data to identify critical metrics like warranty status, AMC coverage, device health, and customer satisfaction.</li>
+                <li><strong>Natural Language Summarization: </strong>:Used LLMs to translate technical insights into concise, readable summaries.</li>
+                <li><strong>Interactive Dashboard Integration:</strong>:Enabled insight display on hover within Power BI dashboards for real-time understanding.</li>
+                <li><strong>Action-Oriented Feedback:</strong> Provided intuitive insights to guide stakeholder actions on device servicing, contract renewals, and client satisfaction improvements.</li>
+                <li><strong>Scalable Design:</strong>Built to accommodate expanding datasets and additional device categories.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Technologies and Tools</h2>
+            <ul>
+                <li><strong>Programming Languages</strong>: Python</li>
+                <li><strong>Machine Learning & NLP</strong>:Hugging Face Transformers, OpenAI,</li>
+                <li><strong>Data Processing</strong>: Pandas, NumPy</li>
+                <li><strong>Data Storage:</strong>:  SQL, Excel-based integration for legacy data</li>
+                 <li><strong> Visualization:</strong>:PowerBI </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Problem Statement</h2>
+            <p>Non-technical stakeholders in healthcare operations often struggled to interpret complex device data such as service contracts, usage patterns,
+  and health indicators. This resulted in delayed decisions, missed SLA deadlines, and suboptimal client servicing.
+  There was a need for a system that could present technical analytics in a simplified, actionable format directly within their existing reporting tools.</p>
+        </section>
+
+        <section>
+            <h2>Solution Approach</h2>
+            <p>The solution consisted of an end-to-end pipeline that extracted key descriptive statistics from healthcare device data,
+passed them through an LLM-based NLG engine, and delivered context-rich summaries through Power BI. On hover, users could instantly read insights 
+like which clients were dissatisfied, which machines were approaching warranty expiration,
+  or which devices needed servicing. This enabled proactive engagement and streamlined stakeholder response.</p>
+        </section>
+
+        <section>
+            <h2>Results</h2>
+            <ul>
+                <li><strong>Increased Actionability:</strong> Enabled faster and more informed decision-making by non-technical users.</li>
+                <li><strong>Improved Client Satisfaction:</strong>Stakeholders could proactively identify unhappy clients and take corrective action.</li>
+                <li><strong>Operational Efficiency:</strong> Reduced time spent in meetings and follow-ups by 40%.</li>
+                <li><strong>Asset Visibility:</strong>Achieved 100% traceability of device status across warranty and AMC contracts.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Challenges</h2>
+            <p>Key challenges included ensuring the LLM-generated summaries were accurate and contextually relevant,
+integrating the system smoothly with Power BI, and handling fragmented and inconsistent legacy data. Additionally,
+  balancing summarization brevity with actionable depth required iterative tuning of the NLG output and stakeholder feedback loops.
+</p>
+        </section>
+
+
+    
+    </div>
+</body>
+</html>
