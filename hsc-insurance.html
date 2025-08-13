@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insurance Churn Prediction & Retention Activation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Insurance Churn Prediction & Retention Activation</h1>
+
+    <section>
+      <h2>Project Overview</h2>
+      <p>
+        This project predicts <strong>policyholder churn at renewal</strong> and turns risk scores into
+        <strong>targeted retention actions</strong>. Using behavioral, payment, and claims features, we
+        train classification models to estimate the probability of churn and surface
+        <em>next-best offers</em> (e.g., auto-debit enrollment, payment frequency change, loyalty
+        credits). Insights are published to dashboards/CRM so sales and service teams can
+        prioritize outreach and reduce attrition.
+      </p>
+    </section>
+
+    <section>
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Risk Scoring:</strong> Per-policy churn probability and tiered risk bands (Low/Med/High).</li>
+        <li><strong>Robust Modeling:</strong> <em>Logistic Regression</em> baseline with calibrated probabilities; <em>XGBoost</em>/<em>Random Forest</em> for higher recall at similar precision.</li>
+        <li><strong>Imbalance Handling:</strong> Class weights / SMOTE and <em>threshold tuning</em> for recall-focused targeting.</li>
+        <li><strong>Explainability:</strong> Top drivers via coefficients/feature importances and SHAP plots for high‑risk cohorts.</li>
+        <li><strong>Operational Integration:</strong> Scores pushed to CRM and shown in <em>Power BI</em> with filters for region/segment/agent.</li>
+        <li><strong>A/B Friendly:</strong> Buckets customers by uplift hypothesis to enable controlled retention experiments.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technologies and Tools</h2>
+      <ul>
+        <li><strong>Programming:</strong> Python</li>
+        <li><strong>Modeling:</strong> scikit‑learn (Logistic Regression, Random Forest), XGBoost</li>
+        <li><strong>Data Processing:</strong> Pandas, NumPy (feature pipelines, leakage guards)</li>
+        <li><strong>Visualization & Ops:</strong> Power BI dashboards; exports/webhooks to CRM</li>
+        <li><strong>Storage:</strong> SQL warehouse; CSV/Excel extracts for ops teams</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Problem Statement</h2>
+      <p>
+        Churn is concentrated around <strong>renewal</strong> but difficult to prevent without early
+        signals. Agents lack a prioritized list and often spend effort on customers unlikely to
+        churn, missing those at genuine risk. We needed <em>reliable, interpretable churn scores</em>
+        with clear actions to <strong>reduce attrition</strong> cost‑effectively.
+      </p>
+    </section>
+
+    <section>
+      <h2>Solution Approach</h2>
+      <p>
+        We assembled features from policy, billing, and service systems (tenure, premium,
+        payment frequency, auto‑debit, late‑payments, claims, endorsements, complaints, channel,
+        city tier). After leakage checks and stratified splits, we trained a calibrated
+        <strong>Logistic Regression</strong> and a tuned <strong>XGBoost</strong>/<strong>Random Forest</strong>. We optimized
+        <em>precision‑recall trade‑offs</em> via thresholding aligned to retention capacity and cost.
+      </p>
+      <ul>
+        <li><strong>Feature Pipeline:</strong> missing‑value imputation, one‑hot encoding, scaling where needed.</li>
+        <li><strong>Calibration:</strong> probability calibration for rank ordering stability across cohorts.</li>
+        <li><strong>Thresholding:</strong> choose operating point (e.g., P(churn) ≥ 0.4) to maximize saved revenue per contact.</li>
+        <li><strong>Activation:</strong> push high‑risk lists + reason codes to CRM; Power BI slices for agent/region.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Results</h2>
+      <ul>
+        <li><strong>Model Quality:</strong> ROC‑AUC <strong>0.90</strong>, F1 <strong>0.78</strong>, Recall <strong>0.82</strong> at tuned threshold.</li>
+        <li><strong>Business Impact:</strong> Targeted retention reduced churn by <strong>12–15%</strong> in pilot cohorts.</li>
+        <li><strong>Operational Wins:</strong> Prioritized call lists and clear reason codes shortened outreach cycles.</li>
+      </ul>
+      <p class="disclaimer"><em>Note:</em> Metrics reflect a representative deployment; adjust with your environment’s validation.</p>
+    </section>
+
+    <section>
+      <h2>Challenges</h2>
+      <p>
+        Addressed <strong>class imbalance</strong>, seasonal renewal spikes, potential <strong>data leakage</strong> from
+        post‑renewal events, and <strong>cold‑start</strong> customers with short tenures. We iterated on
+        sampling, regularization, and segmentation to maintain stability across regions.
+      </p>
+    </section>
+
+    <section>
+      <h2>Future Enhancements</h2>
+      <ul>
+        <li><strong>Uplift Modeling:</strong> Target customers with highest treatment effect, not just highest risk.</li>
+        <li><strong>Cost‑Aware Optimization:</strong> Thresholds based on contact cost vs. premium retained.</li>
+        <li><strong>Realtime Scoring:</strong> Stream scores near renewal events for same‑day agent action.</li>
+        <li><strong>Explainability at Scale:</strong> SHAP summaries by agent/region for coaching and QA.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Repository</h2>
+      <p>
+        <a href="https://github.com/yourname/insurance-churn" target="_blank"><strong>GitHub: More details</strong></a>
+      </p>
+    </section>
+  </div>
+</body>
+</html>
