@@ -1,81 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LandisGyr :Healthcare Device Insight Automation</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Telemetry Failure Prediction & Proactive SR Automation</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Healthcare Device Insight Automation</h1>
+  <div class="container">
+    <h1>Telemetry Failure Prediction & Proactive SR Automation</h1>
 
-        <section>
-            <h2>Project Overview</h2>
-            <p>This project involved the development of a Natural Language Generation (NLG) engine to convert complex device analytics 
-into human-readable insights for non-technical stakeholders in the healthcare industry. Focused on equipment like MRI and CT scan machines,
-  the system extracted descriptive insights from raw data and used large language models (LLMs) to generate context-aware narratives. 
-  These narratives were displayed on a Power BI dashboard, allowing stakeholders to gain actionable information by simply hovering over data points. 
-The solution streamlined decision-making and improved communication between technical teams and business users..</p>
-        </section>
+    <section>
+      <h2>Project Overview</h2>
+      <p>
+        This project turns raw <strong>device telemetry</strong> into early warnings and
+        clear actions. We model <em>trigger-symptom sequences</em> that typically precede
+        incidents and predict whether they will culminate in a <strong>Service Request (SR)</strong>
+        creation. The system continuously analyzes incoming signals, identifies risky
+        symptom chains, and surfaces <strong>proactive recommendations</strong> so engineers can
+        intervene before failure, reducing downtime and improving customer experience.
+      </p>
+    </section>
 
-        <section>
-            <h2>Key Features</h2>
-            <ul>
-                <li><strong>Descriptive Insight Extraction:</strong>: Parsed raw data to identify critical metrics like warranty status, AMC coverage, device health, and customer satisfaction.</li>
-                <li><strong>Natural Language Summarization: </strong>:Used LLMs to translate technical insights into concise, readable summaries.</li>
-                <li><strong>Interactive Dashboard Integration:</strong>:Enabled insight display on hover within Power BI dashboards for real-time understanding.</li>
-                <li><strong>Action-Oriented Feedback:</strong> Provided intuitive insights to guide stakeholder actions on device servicing, contract renewals, and client satisfaction improvements.</li>
-                <li><strong>Scalable Design:</strong>Built to accommodate expanding datasets and additional device categories.</li>
-            </ul>
-        </section>
+    <section>
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Sequence-Aware Detection:</strong> Learns patterns where <em>trigger symptoms</em> form a chain that commonly leads to SR creation.</li>
+        <li><strong>Hybrid Modeling:</strong> Uses <em>Hidden Markov Models (HMM)</em> to encode temporal state transitions and an <em>XGBoost</em> meta-classifier to score failure risk.</li>
+        <li><strong>Proactive Alerts:</strong> Generates early warnings with recommended next actions (e.g., component check, firmware update, workload throttle).</li>
+        <li><strong>Operational Integration:</strong> Publishes insights to dashboards (e.g., Power BI) and pushes notifications to on-call workflows.</li>
+        <li><strong>Explainability:</strong> Highlights top symptoms, state transitions, and features contributing to risk scores.</li>
+        <li><strong>Scalable Ingestion:</strong> Handles high-frequency telemetry from many devices with streaming-friendly preprocessing.</li>
+      </ul>
+    </section>
 
-        <section>
-            <h2>Technologies and Tools</h2>
-            <ul>
-                <li><strong>Programming Languages</strong>: Python</li>
-                <li><strong>Machine Learning & NLP</strong>:Hugging Face Transformers, OpenAI,</li>
-                <li><strong>Data Processing</strong>: Pandas, NumPy</li>
-                <li><strong>Data Storage:</strong>:  SQL, Excel-based integration for legacy data</li>
-                 <li><strong> Visualization:</strong>:PowerBI </li>
-            </ul>
-        </section>
+    <section>
+      <h2>Technologies and Tools</h2>
+      <ul>
+        <li><strong>Programming:</strong> Python</li>
+        <li><strong>Sequence Modeling:</strong> Hidden Markov Models (hmmlearn / custom), n‑gram & duration features</li>
+        <li><strong>Meta Classifier:</strong> XGBoost (gradient boosted trees)</li>
+        <li><strong>Data Processing:</strong> Pandas, NumPy (windowing, sequence builds, feature stores)</li>
+        <li><strong>Visualization & Ops:</strong> Power BI dashboards; alerting via webhooks</li>
+        <li><strong>Storage:</strong> SQL warehouse; Excel exports for legacy reporting</li>
+      </ul>
+    </section>
 
-        <section>
-            <h2>Problem Statement</h2>
-            <p>Non-technical stakeholders in healthcare operations often struggled to interpret complex device data such as service contracts, usage patterns,
-  and health indicators. This resulted in delayed decisions, missed SLA deadlines, and suboptimal client servicing.
-  There was a need for a system that could present technical analytics in a simplified, actionable format directly within their existing reporting tools.</p>
-        </section>
+    <section>
+      <h2>Problem Statement</h2>
+      <p>
+        In complex systems, failures rarely appear as isolated events—they are preceded by
+        <strong>symptom sequences</strong>. Without modeling the order and timing of these signals,
+        teams react late, miss SLAs, and open SRs only after customer impact. We needed a
+        solution that <em>understands temporal patterns</em> in telemetry, predicts likely SR
+        creation ahead of time, and prescribes the most effective preventative action.
+      </p>
+    </section>
 
-        <section>
-            <h2>Solution Approach</h2>
-            <p>The solution consisted of an end-to-end pipeline that extracted key descriptive statistics from healthcare device data,
-passed them through an LLM-based NLG engine, and delivered context-rich summaries through Power BI. On hover, users could instantly read insights 
-like which clients were dissatisfied, which machines were approaching warranty expiration,
-  or which devices needed servicing. This enabled proactive engagement and streamlined stakeholder response.</p>
-        </section>
+    <section>
+      <h2>Solution Approach</h2>
+      <p>
+        We build sequences from incoming telemetry and detect <em>trigger chains</em> using an
+        <strong>HMM</strong> to map observed symptoms to hidden health states (Healthy → Degraded →
+        Critical). The per-sequence state probabilities, dwell times, and transition
+        statistics are then fed into an <strong>XGBoost</strong> meta-classifier to predict the
+        probability of <strong>SR creation within a lead window</strong> (e.g., next 24–72 hours).
+        The system outputs risk scores, top contributing symptoms, and <em>action playbooks</em>.
+      </p>
+      <ul>
+        <li><strong>Sequence Construction:</strong> sliding windows, event bucketing, inter‑arrival gaps, and symptom n‑grams.</li>
+        <li><strong>HMM Features:</strong> state posteriors, transition likelihoods, dwell times, and last state change recency.</li>
+        <li><strong>Meta Features:</strong> recency counts, velocity/acceleration of KPIs, seasonality flags, device cohort stats.</li>
+        <li><strong>Classifier Output:</strong> P(SR | sequence), lead time band, and mitigation suggestions.</li>
+      </ul>
+    </section>
 
-        <section>
-            <h2>Results</h2>
-            <ul>
-                <li><strong>Increased Actionability:</strong> Enabled faster and more informed decision-making by non-technical users.</li>
-                <li><strong>Improved Client Satisfaction:</strong>Stakeholders could proactively identify unhappy clients and take corrective action.</li>
-                <li><strong>Operational Efficiency:</strong> Reduced time spent in meetings and follow-ups by 40%.</li>
-                <li><strong>Asset Visibility:</strong>Achieved 100% traceability of device status across warranty and AMC contracts.</li>
-            </ul>
-        </section>
+    <section>
+      <h2>Results</h2>
+      <ul>
+        <li><strong>Early Warnings:</strong> Identified high‑risk chains with meaningful lead time for intervention.</li>
+        <li><strong>Reduced Reactive SRs:</strong> Fewer surprise SRs as teams acted on proactive alerts.</li>
+        <li><strong>Operational Efficiency:</strong> Shorter triage cycles and clearer ownership via recommended actions.</li>
+        <li><strong>Stakeholder Confidence:</strong> Transparent explanations (top symptoms/paths) built trust in the model.</li>
+      </ul>
+      <p class="disclaimer"><em>Note:</em> Exact metrics (precision/recall, lead‑time lift) can be added for the target environment once validated.</p>
+    </section>
 
-        <section>
-            <h2>Challenges</h2>
-            <p>Key challenges included ensuring the LLM-generated summaries were accurate and contextually relevant,
-integrating the system smoothly with Power BI, and handling fragmented and inconsistent legacy data. Additionally,
-  balancing summarization brevity with actionable depth required iterative tuning of the NLG output and stakeholder feedback loops.
-</p>
-        </section>
+    <section>
+      <h2>Challenges</h2>
+      <p>
+        Key challenges included sparse/fragmented symptom logs, aligning clocks across sources,
+        handling non-stationary behavior after firmware changes, and balancing early alerts
+        with false positives. We iterated on sequence definitions, HMM state counts, class
+        weights, and thresholding policies to optimize <em>lead time vs. accuracy</em> trade‑offs.
+      </p>
+    </section>
 
-
-    
-    </div>
+    <section>
+      <h2>Future Enhancements</h2>
+      <ul>
+        <li>Incorporate <strong>cost‑aware thresholds</strong> based on SLA penalties and service costs.</li>
+        <li>Add <strong>online learning</strong> to adapt HMM and XGBoost to drift and new symptom codes.</li>
+        <li>Extend to <strong>multivariate state‑space models</strong> and attention‑based sequence encoders.</li>
+        <li>Tighten <strong>closed‑loop automation</strong>: auto‑open preventative tasks when risk exceeds policy.</li>
+      </ul>
+    </section>
+  </div>
 </body>
 </html>
