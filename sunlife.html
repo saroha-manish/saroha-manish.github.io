@@ -3,33 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agent Performance Early Prediction</title>
+  <title>Agent Performance Forecasting Model</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Agent Attrition Prediction Model</h1>
+    <h1>Agent Performance Forecasting Model</h1>
 
     <section>
       <h2>Project Overview</h2>
       <p>
-        This project converts early agent activity data into actionable performance insights.
-        Using the first <strong>three months of agent performance</strong>, we predict whether a rookie
-        agent is likely to become a <strong>High Performing Agent (AC ≥ 15,000 per month)</strong>.
-        The system evaluates early sales momentum and provides probability scores to enable
-        proactive coaching, structured onboarding, and better workforce planning decisions.
+        This project predicts <strong>future agent performance (Months 4–6)</strong> using
+        insights from the first three months of activity. By analyzing early sales momentum,
+        we classify agents into <strong>High Performing</strong> (AC ≥ 15,000) or <strong>Others</strong>,
+        enabling proactive coaching, better onboarding support, and improved productivity outcomes.
       </p>
     </section>
 
     <section>
       <h2>Key Features</h2>
       <ul>
-        <li><strong>Cohort-Based Modeling:</strong> Agents grouped by tenure to ensure fair performance comparison.</li>
-        <li><strong>Early Momentum Detection:</strong> Uses AC, AFYP, policy count, and proposal activity from Month 1–3.</li>
-        <li><strong>Multi-Model Evaluation:</strong> Compared tree-based models and AutoML to select the most stable performer.</li>
-        <li><strong>Actionable Outputs:</strong> Generates probability scores and High Performer classification.</li>
-        <li><strong>Explainability:</strong> Identifies key early indicators influencing future success.</li>
-        <li><strong>Operational Integration:</strong> Outputs consumed via dashboards for manager-level monitoring.</li>
+        <li><strong>Cohort-Based Structure:</strong> Agents grouped quarterly based on tenure for fair performance comparison.</li>
+        <li><strong>Early Signal Modeling:</strong> Uses AC, AFYP, policy counts, and proposal activity from the first 3 months.</li>
+        <li><strong>Multi-Model Benchmarking:</strong> Evaluated tree-based models and neural networks to identify the champion model.</li>
+        <li><strong>Time-Based Validation:</strong> Separate unseen cohorts used to validate real-world performance.</li>
+        <li><strong>Explainable Insights:</strong> Feature importance analysis to highlight early performance drivers.</li>
+        <li><strong>Deployment Ready:</strong> Outputs integrated into dashboards for managerial decision-making.</li>
       </ul>
     </section>
 
@@ -37,61 +36,71 @@
       <h2>Technologies and Tools</h2>
       <ul>
         <li><strong>Programming:</strong> Python</li>
-        <li><strong>Modeling:</strong> Random Forest, XGBoost, LightGBM, CatBoost, AutoML (Neural Network)</li>
+        <li><strong>Modeling:</strong> Random Forest, XGBoost, LightGBM, CatBoost, NeuralNetFastAI</li>
+        <li><strong>Feature Selection:</strong> Statistical analysis & ML-based importance methods</li>
         <li><strong>Data Processing:</strong> Pandas, NumPy</li>
-        <li><strong>Visualization:</strong> Power BI dashboards</li>
-        <li><strong>Storage:</strong> AWS S3 (processed data zone)</li>
+        <li><strong>Visualization:</strong> Power BI</li>
+        <li><strong>Storage:</strong> AWS S3 data pipelines</li>
       </ul>
     </section>
 
     <section>
       <h2>Problem Statement</h2>
       <p>
-        In insurance sales organizations, performance assessment often happens too late.
-        Managers lack early signals to identify high-potential agents or intervene with
-        underperforming ones. We needed a <strong>reliable early prediction system</strong> that uses
-        initial performance data to identify future high performers and support data-driven
-        coaching strategies.
+        Insurance organizations often evaluate performance too late, limiting opportunities
+        for early intervention. Without predictive signals, managers cannot prioritize coaching
+        or identify high-potential agents quickly. The goal was to create a
+        <strong>data-driven early forecasting system</strong> that improves productivity and retention
+        through timely decision support.
       </p>
     </section>
 
     <section>
       <h2>Solution Approach</h2>
       <p>
-        Agents were structured into <strong>quarterly tenure-based cohorts</strong>.
-        For each agent, performance metrics from the first three months were captured and
-        used to train classification models predicting high performance outcomes.
-        Time-based validation ensured realistic performance measurement.
+        We structured the data into tenure-based cohorts and engineered performance
+        features from the first three months. Multiple classification models were trained
+        and evaluated using time-based splits to ensure realistic deployment conditions.
       </p>
       <ul>
-        <li><strong>Feature Engineering:</strong> Monthly AC, AFYP, policies, and proposal counts.</li>
-        <li><strong>Model Training:</strong> Supervised classification with time-based validation.</li>
-        <li><strong>Threshold Optimization:</strong> Balanced precision and recall for practical deployment.</li>
-        <li><strong>Deployment:</strong> Risk scores surfaced to dashboards for managerial action.</li>
+        <li><strong>Data Preparation:</strong> Filtering, cleaning, and cohort alignment.</li>
+        <li><strong>Feature Engineering:</strong> Monthly AC, AFYP, policies, and proposals.</li>
+        <li><strong>Model Training:</strong> Supervised classification with ROC-AUC evaluation.</li>
+        <li><strong>Champion Selection:</strong> Selected model balancing accuracy, recall, and stability.</li>
+        <li><strong>Deployment:</strong> Probability scores surfaced for managerial action.</li>
       </ul>
     </section>
 
     <section>
       <h2>Results</h2>
       <ul>
-        <li><strong>Strong Predictive Performance:</strong> Maintained stable accuracy and ROC-AUC on unseen cohorts.</li>
-        <li><strong>Early Differentiation:</strong> Successfully identified high-potential agents within 3 months.</li>
-        <li><strong>Balanced Precision & Recall:</strong> Optimized for practical business deployment.</li>
+        <li><strong>Stable Validation Performance:</strong> Maintained strong ROC-AUC across unseen cohorts.</li>
+        <li><strong>Balanced Precision & Recall:</strong> Effective identification of high-performing agents.</li>
+        <li><strong>Improved Early Differentiation:</strong> Clear separation between high-potential and low-momentum agents.</li>
       </ul>
-      
+      <p class="disclaimer">
+        <em>Note:</em> Final metrics may vary depending on cohort mix and deployment conditions.
       </p>
     </section>
 
     <section>
       <h2>Challenges</h2>
       <p>
-        Addressed class imbalance, ensured strict time-based validation to prevent data leakage,
-        managed cohort alignment issues, and balanced model complexity with explainability for
-        leadership stakeholders.
+        Managed class imbalance, prevented data leakage across cohorts, ensured
+        stable time-based validation, and balanced model complexity with interpretability
+        for leadership stakeholders.
       </p>
     </section>
 
-
+    <section>
+      <h2>Future Enhancements</h2>
+      <ul>
+        <li><strong>Behavioral & Engagement Signals:</strong> Include manager and branch-level indicators.</li>
+        <li><strong>Cost-Sensitive Thresholding:</strong> Optimize predictions based on revenue impact.</li>
+        <li><strong>Automated Scoring Pipeline:</strong> Real-time evaluation for new agents.</li>
+        <li><strong>Workflow Integration:</strong> Connect outputs directly with coaching and performance systems.</li>
+      </ul>
+    </section>
 
   </div>
 </body>
