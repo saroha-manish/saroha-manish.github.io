@@ -3,122 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advisor Tipping Point</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>Advisor attrition prediction analysis and Modeling</h1>
-
-    <section>
-      <h2>Project Overview</h2>
-      <p>
-        This project helps the business <strong>spot early potential and early risk</strong> among new advisors.
-        Using what an advisor does in the <strong>first 3 months</strong>, we estimate the likelihood that they
-        will become a <strong>High Performing Advisor</strong> in <strong>months 4–6</strong>.
-        The output is a simple <strong>score</strong> that supports coaching and manager actions, so more advisors
-        succeed and fewer drop off.
-      </p>
-    </section>
-
-    <section>
-      <h2>Key Features</h2>
-      <ul>
-        <li><strong>Early Identification:</strong> Highlights who is likely to do well and who may need help, before months 4–6 start.</li>
-        <li><strong>Simple Output:</strong> Gives one easy-to-use <em>probability score</em> per eligible advisor.</li>
-        <li><strong>Fair Comparison:</strong> Compares advisors at the same stage of tenure (rookie window), not against seniors.</li>
-        <li><strong>Action-Oriented:</strong> Supports manager coaching lists and branch-level prioritization.</li>
-        <li><strong>Explainable Signals:</strong> Shows which early indicators matter most (momentum, consistency, activity).</li>
-        <li><strong>Scalable Refresh:</strong> Designed for monthly refresh and repeatable scoring for new cohorts.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Technologies and Tools</h2>
-      <ul>
-        <li><strong>Data Storage:</strong> S3-based monthly refresh datasets</li>
-        <li><strong>Data Processing:</strong> Python (pandas), SQL-style joins/aggregation</li>
-        <li><strong>Modeling:</strong> Classification model to generate probability score</li>
-        <li><strong>Explainability:</strong> Feature importance (and optional SHAP-based explanations)</li>
-        <li><strong>Reporting:</strong> Output usable for dashboards (Power BI / Excel extracts)</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Problem Statement</h2>
-      <p>
-        Many new advisors struggle in the first few months. By the time performance issues are visible in months 4–6,
-        the opportunity to fix them is often late.
-      </p>
-      <p>
-        Managers need a way to answer early:
-        <strong>“Who should I coach first?”</strong> and <strong>“Who is on track to succeed?”</strong>
-        using signals that already exist in the first 3 months.
-      </p>
-    </section>
-
-    <section>
-      <h2>Solution Approach</h2>
-      <p>
-        We build a tenure-based (rookie-stage) scoring approach:
-      </p>
-      <ul>
-        <li><strong>Step 1: Define the target:</strong> “High Performing” in months 4–6 using a clear business threshold (example: AC rule).</li>
-        <li><strong>Step 2: Build the early window:</strong> summarize month 1–3 performance and activity for each advisor.</li>
-        <li><strong>Step 3: Cohort design:</strong> group advisors by quarter based on when they completed 3 months tenure, to keep comparisons fair.</li>
-        <li><strong>Step 4: Clean & prepare:</strong> remove duplicates, fix dates/types, handle missing critical fields.</li>
-        <li><strong>Step 5: Train the model:</strong> learn patterns from historical cohorts and validate on unseen cohorts.</li>
-        <li><strong>Step 6: Score advisors:</strong> generate a probability score (0–1) for each eligible advisor.</li>
-        <li><strong>Step 7: Business usage:</strong> convert scores into simple groups (High Potential / Watchlist / At Risk) for action.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Results</h2>
-      <p>
-        The key output is a <strong>ranked list of advisors</strong> with an easy score that supports decisions.
-        This enables earlier interventions and better planning.
-      </p>
-      <ul>
-        <li><strong>Manager-ready prioritization:</strong> who needs help first, per branch/team.</li>
-        <li><strong>Early opportunity spotting:</strong> identify strong potential advisors for retention and growth support.</li>
-        <li><strong>Consistent process:</strong> repeatable monthly scoring for new joining cohorts.</li>
-        <li><strong>Explainability:</strong> ability to show top drivers behind the score (for trust and adoption).</li>
-      </ul>
-      <p class="disclaimer">
-        <em>Note:</em> Final model performance numbers (AUC, lift, precision/recall) can be inserted after final validation sign-off.
-      </p>
-    </section>
-
-    <section>
-      <h2>Challenges</h2>
-      <ul>
-        <li><strong>Data quality:</strong> missing or inconsistent contract/joining dates and identifiers in some records.</li>
-        <li><strong>Duplicates:</strong> repeated rows that can inflate counts if not removed carefully.</li>
-        <li><strong>Changing patterns:</strong> advisor behavior can shift across time due to policy/process changes.</li>
-        <li><strong>Fair comparison:</strong> avoiding “senior vs rookie” bias by using cohort/tenure rules.</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Future Enhancements</h2>
-      <ul>
-        <li><strong>Intervention Playbook:</strong> recommended action types based on score and underlying drivers (low activity vs low conversion).</li>
-        <li><strong>Manager/Branch Signals:</strong> include coaching and branch effect to measure what support works best.</li>
-        <li><strong>Drift Monitoring:</strong> monthly checks to detect behavior shifts and maintain prediction quality.</li>
-        <li><strong>Quality Signals:</strong> go beyond counts to include conversion quality and pipeline outcomes.</li>
-        <li><strong>Automation:</strong> push prioritized lists directly into reporting and manager workflows.</li>
-      </ul>
-    </section>
-
-  </div>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Advisor Tipping Point | Rookie Performance Prediction</title>
+  <title>Advisor Tipping Point | Tipping Model</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -128,178 +13,103 @@
     <section>
       <h2>Project Overview</h2>
       <p>
-        This project helps the business <strong>identify promising new advisors early</strong> and
-        <strong>support struggling advisors before they drop off</strong>.
-        We use information from an advisor’s <strong>first 3 months</strong> to estimate whether they are
-        likely to become a <strong>High Performing Advisor</strong> in <strong>months 4–6</strong>.
+        The Advisor Tipping Point model helps the business identify, early in the journey, which new advisors are likely
+        to become <strong>high performers in months 4–6</strong>. It uses signals from the advisor’s <strong>first 3 months</strong>
+        (performance and activity) to generate a simple <strong>probability score</strong> for each eligible advisor.
       </p>
       <p>
-        Think of it like an <strong>early warning + early opportunity system</strong>:
-        it highlights who needs coaching, who needs encouragement, and where managers can take action.
+        The goal is to support practical business decisions: prioritize coaching, improve early productivity, and reduce
+        early drop-offs by acting before outcomes become irreversible.
       </p>
     </section>
 
     <section>
-      <h2>Contents</h2>
+      <h2>Key Features</h2>
       <ul>
-        <li>Introduction</li>
-        <li>Business Objective</li>
-        <li>How This Helps the Business</li>
-        <li>What Data We Used</li>
-        <li>How We Define “High Performing”</li>
-        <li>How the Prediction Works (Simple View)</li>
-        <li>Who Is Included (Eligibility)</li>
-        <li>What the Output Looks Like</li>
-        <li>How to Use the Results</li>
-        <li>Key Drivers (What Matters Most)</li>
-        <li>Challenges</li>
-        <li>Next Improvements</li>
+        <li><strong>Early warning + early opportunity:</strong> Highlights both at-risk and high-potential advisors.</li>
+        <li><strong>Simple score output:</strong> Each eligible advisor receives a probability score (0–1).</li>
+        <li><strong>Fair comparison:</strong> Uses tenure-based cohorts so rookies are compared with rookies.</li>
+        <li><strong>Action-ready:</strong> Supports manager coaching lists and branch-level prioritization.</li>
+        <li><strong>Explainable:</strong> Identifies top early drivers (momentum, consistency, activity).</li>
+        <li><strong>Repeatable refresh:</strong> Designed for monthly scoring as new advisors join.</li>
       </ul>
     </section>
 
     <section>
-      <h2>Business Objective</h2>
+      <h2>Technologies and Tools</h2>
+      <ul>
+        <li><strong>Data Sources:</strong> Advisor master, performance and activity datasets (monthly refresh)</li>
+        <li><strong>Storage:</strong> AWS S3 processed zone</li>
+        <li><strong>Processing:</strong> Python (pandas), SQL-style joins and aggregations</li>
+        <li><strong>Modelling:</strong> Classification model producing probability scores</li>
+        <li><strong>Explainability:</strong> Feature importance and optional SHAP-based explanation</li>
+        <li><strong>Consumption:</strong> Output extracts for dashboards and business reporting</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Problem Statement</h2>
       <p>
-        Predict future performance so we can:
+        Many advisors do not build strong momentum in the first few months, and by the time performance issues are visible
+        in months 4–6, the opportunity to recover is often late. Managers also have limited time and need clarity on
+        <strong>who to coach first</strong> and <strong>what kind of support is needed</strong>.
       </p>
-      <ul>
-        <li><strong>Improve early productivity:</strong> help advisors build strong momentum</li>
-        <li><strong>Reduce early drop-offs:</strong> intervene before an advisor becomes inactive</li>
-        <li><strong>Support managers:</strong> give clear, prioritized lists for coaching</li>
-        <li><strong>Use resources smarter:</strong> focus efforts where impact is highest</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>How This Helps the Business</h2>
-      <ul>
-        <li><strong>Coaching focus:</strong> managers know which advisors to help first</li>
-        <li><strong>Better planning:</strong> branches can plan support and targets better</li>
-        <li><strong>Early success tracking:</strong> measure whether interventions improve outcomes</li>
-        <li><strong>Transparent decisioning:</strong> we can explain why someone is predicted high/low</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>What Data We Used</h2>
       <p>
-        We used trusted business data already available in our systems, mainly from three areas:
+        The challenge is to use existing early signals (months 1–3) to predict likely outcomes (months 4–6) and enable
+        timely intervention at scale.
+      </p>
+    </section>
+
+    <section>
+      <h2>Solution Approach</h2>
+      <p>
+        The model is built as a tenure-based scoring system that uses a fair cohort structure.
       </p>
       <ul>
-        <li><strong>Advisor Master:</strong> advisor code, contract start/end dates, status</li>
-        <li><strong>Performance:</strong> business production signals (like AC/AFYP/policies)</li>
-        <li><strong>Activity:</strong> proposal activity (online and offline)</li>
+        <li><strong>Define success:</strong> Set a clear business rule for “High Performing” in months 4–6 (e.g., AC threshold).</li>
+        <li><strong>Build early signals:</strong> Summarize month 1–3 performance (AC/AFYP/policies) and activity (proposals).</li>
+        <li><strong>Create cohorts:</strong> Group advisors by quarter based on completion of 3 months tenure.</li>
+        <li><strong>Prepare data:</strong> Remove duplicates, correct dates/types, and handle missing critical fields.</li>
+        <li><strong>Train & validate:</strong> Train on earlier cohorts and validate on unseen cohorts to ensure stability.</li>
+        <li><strong>Score advisors:</strong> Generate a probability score (0–1) for each eligible advisor.</li>
+        <li><strong>Enable action:</strong> Convert scores into simple business buckets for coaching and intervention.</li>
       </ul>
+    </section>
 
+    <section>
+      <h2>Results</h2>
+      <p>
+        The model produces an easy-to-use scoring output that helps business teams take action early.
+      </p>
+      <ul>
+        <li><strong>Prioritized coaching:</strong> Managers get a ranked list of advisors who need attention first.</li>
+        <li><strong>Support for high potential:</strong> Identify advisors with strong momentum for retention and growth.</li>
+        <li><strong>Better resource allocation:</strong> Focus branch and manager time where impact is highest.</li>
+        <li><strong>Business explainability:</strong> Drivers can be shared to build trust in decisions.</li>
+      </ul>
       <p class="disclaimer">
-        <em>Note:</em> The data is refreshed monthly and used for cohort-based evaluation (explained below).
-      </p>
-    </section>
-
-    <section>
-      <h2>How We Define “High Performing”</h2>
-      <p>
-        We used a clear business rule to define success:
-      </p>
-      <ul>
-        <li><strong>High Performing Advisor (Target = 1):</strong> AC is <strong>15,000 or above</strong> in the target month</li>
-        <li><strong>Others (Target = 0):</strong> AC is below 15,000 in the target month</li>
-      </ul>
-      <p>
-        The model’s job is to estimate the chance of an advisor reaching this level in <strong>months 4–6</strong>,
-        based on signals from <strong>months 1–3</strong>.
-      </p>
-    </section>
-
-    <section>
-      <h2>How the Prediction Works (Simple View)</h2>
-      <p>
-        We do not compare new advisors with senior advisors directly.
-        Instead, we group advisors by “joining time” so comparisons are fair.
-      </p>
-      <ul>
-        <li><strong>Cohorts:</strong> advisors are grouped by quarter based on when they completed 3 months tenure</li>
-        <li><strong>Input window:</strong> we look at performance/activity in <strong>months 1–3</strong></li>
-        <li><strong>Prediction window:</strong> we estimate performance likelihood in <strong>months 4–6</strong></li>
-        <li><strong>Fairness:</strong> everyone is evaluated at the same tenure stage</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Who Is Included (Eligibility)</h2>
-      <p>
-        This model focuses only on the “rookie” window.
-      </p>
-      <ul>
-        <li>Advisors must have completed <strong>at least 3 months</strong> tenure</li>
-        <li>Advisors above <strong>4 months</strong> tenure are excluded (they are no longer in rookie stage)</li>
-        <li>Advisors with invalid or missing key joining/contract details are excluded</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>What the Output Looks Like</h2>
-      <p>
-        For each eligible advisor, the model gives a <strong>score between 0 and 1</strong>.
-        This score represents the likelihood of becoming a high performer in months 4–6.
-      </p>
-      <ul>
-        <li><strong>Example:</strong> Score 0.82 = strong chance of becoming high performer</li>
-        <li><strong>Example:</strong> Score 0.25 = needs attention/support early</li>
-      </ul>
-
-      <p>
-        The output can be used to create simple business buckets:
-      </p>
-      <ul>
-        <li><strong>High Potential:</strong> prioritize retention + growth support</li>
-        <li><strong>Watchlist:</strong> coach on activity and conversion</li>
-        <li><strong>At Risk:</strong> immediate intervention plan needed</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>How to Use the Results</h2>
-      <ul>
-        <li><strong>Manager action list:</strong> top 20 advisors needing help, per branch</li>
-        <li><strong>Coaching themes:</strong> low activity vs low conversion vs inconsistent production</li>
-        <li><strong>Follow-up tracking:</strong> did coaching improve month 4 performance?</li>
-        <li><strong>Branch review:</strong> compare branches on “early success rate”</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Key Drivers (What Matters Most)</h2>
-      <p>
-        The model typically learns from early momentum patterns. In simple terms, these factors matter most:
-      </p>
-      <ul>
-        <li><strong>Month 2 and Month 3 production:</strong> strong momentum is a good sign</li>
-        <li><strong>Consistency:</strong> steady performance beats random spikes</li>
-        <li><strong>Activity levels:</strong> regular proposals indicate pipeline building</li>
-      </ul>
-
-      <p class="disclaimer">
-        <em>Note:</em> We can show simple “Top Reasons” views for business users using explainability charts.
+        <em>Note:</em> Final evaluation metrics (AUC, lift, precision/recall) should be added after production validation.
       </p>
     </section>
 
     <section>
       <h2>Challenges</h2>
       <ul>
-        <li><strong>Data quality:</strong> missing or incorrect contract/joining dates in some records</li>
-        <li><strong>Duplicates:</strong> repeated entries that needed removal</li>
-        <li><strong>Behavior changes:</strong> advisor patterns can shift over time (policy/process changes)</li>
+        <li><strong>Data quality:</strong> Missing or inconsistent contract/joining dates for some advisors.</li>
+        <li><strong>Duplicates:</strong> Repeated records requiring strict de-duplication rules.</li>
+        <li><strong>Changing behavior:</strong> Shifts over time due to process/policy changes across cohorts.</li>
+        <li><strong>Tenure alignment:</strong> Ensuring month 1–3 and month 4–6 windows are computed consistently.</li>
       </ul>
     </section>
 
     <section>
-      <h2>Next Improvements</h2>
+      <h2>Future Enhancements</h2>
       <ul>
-        <li>Add <strong>manager/branch influence</strong> signals to understand coaching impact</li>
-        <li>Build <strong>monthly monitoring</strong> to detect shifts and keep predictions stable</li>
-        <li>Include <strong>conversion quality</strong> (not just activity count)</li>
-        <li>Create an <strong>intervention playbook</strong>: recommended actions by risk type</li>
+        <li><strong>Intervention playbook:</strong> Recommended actions based on score and driver patterns.</li>
+        <li><strong>Manager/branch features:</strong> Capture coaching and branch effects to learn what support works.</li>
+        <li><strong>Drift monitoring:</strong> Monthly checks to ensure the model remains stable over time.</li>
+        <li><strong>Quality signals:</strong> Add conversion outcomes, not only activity counts.</li>
+        <li><strong>Automation:</strong> Integrate outputs into dashboards and manager workflows for faster adoption.</li>
       </ul>
     </section>
 
