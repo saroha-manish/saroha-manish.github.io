@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agent Performance Forecasting Model</title>
+  <title>Agent Attrition Prediction Model</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -13,22 +13,22 @@
     <section>
       <h2>Project Overview</h2>
       <p>
-        This project predicts <strong>future agent performance (Months 4–6)</strong> using
-        insights from the first three months of activity. By analyzing early sales momentum,
-        we classify agents into <strong>High Performing</strong> (AC ≥ 15,000) or <strong>Others</strong>,
-        enabling proactive coaching, better onboarding support, and improved productivity outcomes.
+        Designed and implemented a production-ready <strong>Agent Attrition Prediction Model</strong>
+        to identify early disengagement risk.
+        The system analyzes tenure, performance momentum, and engagement signals to
+        generate <strong>per-agent attrition risk scores</strong>, enabling proactive retention
+        interventions and data-driven workforce planning.
       </p>
     </section>
 
     <section>
       <h2>Key Features</h2>
       <ul>
-        <li><strong>Cohort-Based Structure:</strong> Agents grouped quarterly based on tenure for fair performance comparison.</li>
-        <li><strong>Early Signal Modeling:</strong> Uses AC, AFYP, policy counts, and proposal activity from the first 3 months.</li>
-        <li><strong>Multi-Model Benchmarking:</strong> Evaluated tree-based models and neural networks to identify the champion model.</li>
-        <li><strong>Time-Based Validation:</strong> Separate unseen cohorts used to validate real-world performance.</li>
-        <li><strong>Explainable Insights:</strong> Feature importance analysis to highlight early performance drivers.</li>
-        <li><strong>Deployment Ready:</strong> Outputs integrated into dashboards for managerial decision-making.</li>
+        <li><strong>Attrition Risk Scoring:</strong> Generated probability scores with Low / Medium / High risk segmentation.</li>
+        <li><strong>Early Tenure Monitoring:</strong> Focused on first 60–120 days, the most critical attrition window.</li>
+        <li><strong>Reason Codes:</strong> Identified key drivers such as low productivity momentum and engagement gaps.</li>
+        <li><strong>Cohort-Based Analysis:</strong> Tracked attrition trends across onboarding batches and branches.</li>
+        <li><strong>Manager Activation:</strong> Delivered prioritized risk lists for structured follow-ups.</li>
       </ul>
     </section>
 
@@ -36,70 +36,57 @@
       <h2>Technologies and Tools</h2>
       <ul>
         <li><strong>Programming:</strong> Python</li>
-        <li><strong>Modeling:</strong> Random Forest, XGBoost, LightGBM, CatBoost, NeuralNetFastAI</li>
-        <li><strong>Feature Selection:</strong> Statistical analysis & ML-based importance methods</li>
+        <li><strong>Modeling:</strong> XGBoost / LightGBM / scikit-learn</li>
         <li><strong>Data Processing:</strong> Pandas, NumPy</li>
-        <li><strong>Visualization:</strong> Power BI</li>
-        <li><strong>Storage:</strong> AWS S3 data pipelines</li>
+        <li><strong>Visualization:</strong> Power BI dashboards</li>
+        <li><strong>Data Storage:</strong> SQL warehouse & AWS S3</li>
       </ul>
     </section>
 
     <section>
       <h2>Problem Statement</h2>
       <p>
-        Insurance organizations often evaluate performance too late, limiting opportunities
-        for early intervention. Without predictive signals, managers cannot prioritize coaching
-        or identify high-potential agents quickly. The goal was to create a
-        <strong>data-driven early forecasting system</strong> that improves productivity and retention
-        through timely decision support.
+        Early agent attrition significantly impacts revenue and onboarding investments.
+        Managers lacked structured visibility into which agents were likely to disengage.
+        A predictive and interpretable system was required to detect attrition risk early
+        and enable timely coaching interventions.
       </p>
     </section>
 
     <section>
       <h2>Solution Approach</h2>
       <p>
-        We structured the data into tenure-based cohorts and engineered performance
-        features from the first three months. Multiple classification models were trained
-        and evaluated using time-based splits to ensure realistic deployment conditions.
+        Built a supervised classification framework using tenure alignment,
+        early performance indicators, and activity-based features.
+        Implemented cohort-based validation to prevent data leakage and ensure stability.
+        Converted model outputs into operational risk tiers and actionable reason codes
+        for real-world deployment.
       </p>
       <ul>
-        <li><strong>Data Preparation:</strong> Filtering, cleaning, and cohort alignment.</li>
-        <li><strong>Feature Engineering:</strong> Monthly AC, AFYP, policies, and proposals.</li>
-        <li><strong>Model Training:</strong> Supervised classification with ROC-AUC evaluation.</li>
-        <li><strong>Champion Selection:</strong> Selected model balancing accuracy, recall, and stability.</li>
-        <li><strong>Deployment:</strong> Probability scores surfaced for managerial action.</li>
+        <li><strong>Feature Engineering:</strong> Tenure stage, productivity velocity, activity frequency.</li>
+        <li><strong>Validation:</strong> Time-based cohort split for realistic performance evaluation.</li>
+        <li><strong>Threshold Optimization:</strong> Balanced precision and recall for retention team capacity.</li>
+        <li><strong>Deployment:</strong> Integrated scoring outputs into leadership dashboards.</li>
       </ul>
     </section>
 
     <section>
       <h2>Results</h2>
       <ul>
-        <li><strong>Stable Validation Performance:</strong> Maintained strong ROC-AUC across unseen cohorts.</li>
-        <li><strong>Balanced Precision & Recall:</strong> Effective identification of high-performing agents.</li>
-        <li><strong>Improved Early Differentiation:</strong> Clear separation between high-potential and low-momentum agents.</li>
+        <li><strong>Early Risk Identification:</strong> Enabled detection of high-risk agents within the first few months.</li>
+        <li><strong>Improved Retention Prioritization:</strong> Focused manager effort on agents with highest attrition probability.</li>
+        <li><strong>Operational Adoption:</strong> Risk segmentation and reason codes improved leadership trust and usage.</li>
+        <li><strong>Strategic Workforce Insight:</strong> Cohort-level analysis supported onboarding and staffing decisions.</li>
       </ul>
-      <p class="disclaimer">
-        <em>Note:</em> Final metrics may vary depending on cohort mix and deployment conditions.
-      </p>
     </section>
 
     <section>
       <h2>Challenges</h2>
       <p>
-        Managed class imbalance, prevented data leakage across cohorts, ensured
-        stable time-based validation, and balanced model complexity with interpretability
-        for leadership stakeholders.
+        Differentiating temporary low momentum from genuine disengagement required
+        careful feature design and validation. Cohort variability across regions and
+        managers was addressed through stable modeling and continuous monitoring.
       </p>
-    </section>
-
-    <section>
-      <h2>Future Enhancements</h2>
-      <ul>
-        <li><strong>Behavioral & Engagement Signals:</strong> Include manager and branch-level indicators.</li>
-        <li><strong>Cost-Sensitive Thresholding:</strong> Optimize predictions based on revenue impact.</li>
-        <li><strong>Automated Scoring Pipeline:</strong> Real-time evaluation for new agents.</li>
-        <li><strong>Workflow Integration:</strong> Connect outputs directly with coaching and performance systems.</li>
-      </ul>
     </section>
 
   </div>
