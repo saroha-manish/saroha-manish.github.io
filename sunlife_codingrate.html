@@ -1,37 +1,35 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunlife</title>
+  <title>Agent Performance Early Prediction</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Sunlife</h1>
+    <h1>Agent Recruitment and Performance Model</h1>
 
     <section>
       <h2>Project Overview</h2>
       <p>
-        This project turns raw <strong>sunlife</strong> into early warnings and
-        clear actions. We model <em>trigger-symptom sequences</em> that typically precede
-        incidents and predict whether they will culminate in a <strong>Service Request (SR)</strong>
-        creation. The system continuously analyzes incoming signals, identifies risky
-        symptom chains, and surfaces <strong>proactive recommendations</strong> so engineers can
-        intervene before failure, reducing downtime and improving customer experience.
+        This project converts early agent activity data into actionable performance insights.
+        Using the first <strong>three months of agent performance</strong>, we predict whether a rookie
+        agent is likely to become a <strong>High Performing Agent (AC ≥ 15,000 per month)</strong>.
+        The system evaluates early sales momentum and provides probability scores to enable
+        proactive coaching, structured onboarding, and better workforce planning decisions.
       </p>
     </section>
 
     <section>
       <h2>Key Features</h2>
       <ul>
-        <li><strong>Sequence-Aware Detection:</strong> Learns patterns where <em>trigger symptoms</em> form a chain that commonly leads to SR creation.</li>
-        <li><strong>Hybrid Modeling:</strong> Uses <em>Hidden Markov Models (HMM)</em> to encode temporal state transitions and an <em>XGBoost</em> meta-classifier to score failure risk.</li>
-        <li><strong>Proactive Alerts:</strong> Generates early warnings with recommended next actions (e.g., component check, firmware update, workload throttle).</li>
-        <li><strong>Operational Integration:</strong> Publishes insights to dashboards (e.g., Power BI) and pushes notifications to on-call workflows.</li>
-        <li><strong>Explainability:</strong> Highlights top symptoms, state transitions, and features contributing to risk scores.</li>
-        <li><strong>Scalable Ingestion:</strong> Handles high-frequency telemetry from many devices with streaming-friendly preprocessing.</li>
+        <li><strong>Cohort-Based Modeling:</strong> Agents grouped by tenure to ensure fair performance comparison.</li>
+        <li><strong>Early Momentum Detection:</strong> Uses AC, AFYP, policy count, and proposal activity from Month 1–3.</li>
+        <li><strong>Multi-Model Evaluation:</strong> Compared tree-based models and AutoML to select the most stable performer.</li>
+        <li><strong>Actionable Outputs:</strong> Generates probability scores and High Performer classification.</li>
+        <li><strong>Explainability:</strong> Identifies key early indicators influencing future success.</li>
+        <li><strong>Operational Integration:</strong> Outputs consumed via dashboards for manager-level monitoring.</li>
       </ul>
     </section>
 
@@ -39,73 +37,62 @@
       <h2>Technologies and Tools</h2>
       <ul>
         <li><strong>Programming:</strong> Python</li>
-        <li><strong>Sequence Modeling:</strong> Hidden Markov Models (hmmlearn / custom), n‑gram & duration features</li>
-        <li><strong>Meta Classifier:</strong> XGBoost (gradient boosted trees)</li>
-        <li><strong>Data Processing:</strong> Pandas, NumPy (windowing, sequence builds, feature stores)</li>
-        <li><strong>Visualization & Ops:</strong> Power BI dashboards; alerting via webhooks</li>
-        <li><strong>Storage:</strong> SQL warehouse; Excel exports for legacy reporting</li>
+        <li><strong>Modeling:</strong> Random Forest, XGBoost, LightGBM, CatBoost, AutoML (Neural Network)</li>
+        <li><strong>Data Processing:</strong> Pandas, NumPy</li>
+        <li><strong>Visualization:</strong> Power BI dashboards</li>
+        <li><strong>Storage:</strong> AWS S3 (processed data zone)</li>
       </ul>
     </section>
 
     <section>
       <h2>Problem Statement</h2>
       <p>
-        In complex systems, failures rarely appear as isolated events—they are preceded by
-        <strong>symptom sequences</strong>. Without modeling the order and timing of these signals,
-        teams react late, miss SLAs, and open SRs only after customer impact. We needed a
-        solution that <em>understands temporal patterns</em> in telemetry, predicts likely SR
-        creation ahead of time, and prescribes the most effective preventative action.
+        In insurance sales organizations, performance assessment often happens too late.
+        Managers lack early signals to identify high-potential agents or intervene with
+        underperforming ones. We needed a <strong>reliable early prediction system</strong> that uses
+        initial performance data to identify future high performers and support data-driven
+        coaching strategies.
       </p>
     </section>
 
     <section>
       <h2>Solution Approach</h2>
       <p>
-        We build sequences from incoming telemetry and detect <em>trigger chains</em> using an
-        <strong>HMM</strong> to map observed symptoms to hidden health states (Healthy → Degraded →
-        Critical). The per-sequence state probabilities, dwell times, and transition
-        statistics are then fed into an <strong>XGBoost</strong> meta-classifier to predict the
-        probability of <strong>SR creation within a lead window</strong> (e.g., next 24–72 hours).
-        The system outputs risk scores, top contributing symptoms, and <em>action playbooks</em>.
+        Agents were structured into <strong>quarterly tenure-based cohorts</strong>.
+        For each agent, performance metrics from the first three months were captured and
+        used to train classification models predicting high performance outcomes.
+        Time-based validation ensured realistic performance measurement.
       </p>
       <ul>
-        <li><strong>Sequence Construction:</strong> sliding windows, event bucketing, inter‑arrival gaps, and symptom n‑grams.</li>
-        <li><strong>HMM Features:</strong> state posteriors, transition likelihoods, dwell times, and last state change recency.</li>
-        <li><strong>Meta Features:</strong> recency counts, velocity/acceleration of KPIs, seasonality flags, device cohort stats.</li>
-        <li><strong>Classifier Output:</strong> P(SR | sequence), lead time band, and mitigation suggestions.</li>
+        <li><strong>Feature Engineering:</strong> Monthly AC, AFYP, policies, and proposal counts.</li>
+        <li><strong>Model Training:</strong> Supervised classification with time-based validation.</li>
+        <li><strong>Threshold Optimization:</strong> Balanced precision and recall for practical deployment.</li>
+        <li><strong>Deployment:</strong> Risk scores surfaced to dashboards for managerial action.</li>
       </ul>
     </section>
 
     <section>
       <h2>Results</h2>
       <ul>
-        <li><strong>Early Warnings:</strong> Identified high‑risk chains with meaningful lead time for intervention.</li>
-        <li><strong>Reduced Reactive SRs:</strong> Fewer surprise SRs as teams acted on proactive alerts.</li>
-        <li><strong>Operational Efficiency:</strong> Shorter triage cycles and clearer ownership via recommended actions.</li>
-        <li><strong>Stakeholder Confidence:</strong> Transparent explanations (top symptoms/paths) built trust in the model.</li>
+        <li><strong>Strong Predictive Performance:</strong> Maintained stable accuracy and ROC-AUC on unseen cohorts.</li>
+        <li><strong>Early Differentiation:</strong> Successfully identified high-potential agents within 3 months.</li>
+        <li><strong>Balanced Precision & Recall:</strong> Optimized for practical business deployment.</li>
       </ul>
-      <p class="disclaimer"><em>Note:</em> Exact metrics (precision/recall, lead‑time lift) can be added for the target environment once validated.</p>
+      
+      </p>
     </section>
 
     <section>
       <h2>Challenges</h2>
       <p>
-        Key challenges included sparse/fragmented symptom logs, aligning clocks across sources,
-        handling non-stationary behavior after firmware changes, and balancing early alerts
-        with false positives. We iterated on sequence definitions, HMM state counts, class
-        weights, and thresholding policies to optimize <em>lead time vs. accuracy</em> trade‑offs.
+        Addressed class imbalance, ensured strict time-based validation to prevent data leakage,
+        managed cohort alignment issues, and balanced model complexity with explainability for
+        leadership stakeholders.
       </p>
     </section>
 
-    <section>
-      <h2>Future Enhancements</h2>
-      <ul>
-        <li>Incorporate <strong>cost‑aware thresholds</strong> based on SLA penalties and service costs.</li>
-        <li>Add <strong>online learning</strong> to adapt HMM and XGBoost to drift and new symptom codes.</li>
-        <li>Extend to <strong>multivariate state‑space models</strong> and attention‑based sequence encoders.</li>
-        <li>Tighten <strong>closed‑loop automation</strong>: auto‑open preventative tasks when risk exceeds policy.</li>
-      </ul>
-    </section>
+
+
   </div>
 </body>
 </html>
