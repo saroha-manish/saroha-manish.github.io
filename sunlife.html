@@ -3,6 +3,121 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Advisor Tipping Point</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Advisor Tipping Point</h1>
+
+    <section>
+      <h2>Project Overview</h2>
+      <p>
+        This project helps the business <strong>spot early potential and early risk</strong> among new advisors.
+        Using what an advisor does in the <strong>first 3 months</strong>, we estimate the likelihood that they
+        will become a <strong>High Performing Advisor</strong> in <strong>months 4–6</strong>.
+        The output is a simple <strong>score</strong> that supports coaching and manager actions, so more advisors
+        succeed and fewer drop off.
+      </p>
+    </section>
+
+    <section>
+      <h2>Key Features</h2>
+      <ul>
+        <li><strong>Early Identification:</strong> Highlights who is likely to do well and who may need help, before months 4–6 start.</li>
+        <li><strong>Simple Output:</strong> Gives one easy-to-use <em>probability score</em> per eligible advisor.</li>
+        <li><strong>Fair Comparison:</strong> Compares advisors at the same stage of tenure (rookie window), not against seniors.</li>
+        <li><strong>Action-Oriented:</strong> Supports manager coaching lists and branch-level prioritization.</li>
+        <li><strong>Explainable Signals:</strong> Shows which early indicators matter most (momentum, consistency, activity).</li>
+        <li><strong>Scalable Refresh:</strong> Designed for monthly refresh and repeatable scoring for new cohorts.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technologies and Tools</h2>
+      <ul>
+        <li><strong>Data Storage:</strong> S3-based monthly refresh datasets</li>
+        <li><strong>Data Processing:</strong> Python (pandas), SQL-style joins/aggregation</li>
+        <li><strong>Modeling:</strong> Classification model to generate probability score</li>
+        <li><strong>Explainability:</strong> Feature importance (and optional SHAP-based explanations)</li>
+        <li><strong>Reporting:</strong> Output usable for dashboards (Power BI / Excel extracts)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Problem Statement</h2>
+      <p>
+        Many new advisors struggle in the first few months. By the time performance issues are visible in months 4–6,
+        the opportunity to fix them is often late.
+      </p>
+      <p>
+        Managers need a way to answer early:
+        <strong>“Who should I coach first?”</strong> and <strong>“Who is on track to succeed?”</strong>
+        using signals that already exist in the first 3 months.
+      </p>
+    </section>
+
+    <section>
+      <h2>Solution Approach</h2>
+      <p>
+        We build a tenure-based (rookie-stage) scoring approach:
+      </p>
+      <ul>
+        <li><strong>Step 1: Define the target:</strong> “High Performing” in months 4–6 using a clear business threshold (example: AC rule).</li>
+        <li><strong>Step 2: Build the early window:</strong> summarize month 1–3 performance and activity for each advisor.</li>
+        <li><strong>Step 3: Cohort design:</strong> group advisors by quarter based on when they completed 3 months tenure, to keep comparisons fair.</li>
+        <li><strong>Step 4: Clean & prepare:</strong> remove duplicates, fix dates/types, handle missing critical fields.</li>
+        <li><strong>Step 5: Train the model:</strong> learn patterns from historical cohorts and validate on unseen cohorts.</li>
+        <li><strong>Step 6: Score advisors:</strong> generate a probability score (0–1) for each eligible advisor.</li>
+        <li><strong>Step 7: Business usage:</strong> convert scores into simple groups (High Potential / Watchlist / At Risk) for action.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Results</h2>
+      <p>
+        The key output is a <strong>ranked list of advisors</strong> with an easy score that supports decisions.
+        This enables earlier interventions and better planning.
+      </p>
+      <ul>
+        <li><strong>Manager-ready prioritization:</strong> who needs help first, per branch/team.</li>
+        <li><strong>Early opportunity spotting:</strong> identify strong potential advisors for retention and growth support.</li>
+        <li><strong>Consistent process:</strong> repeatable monthly scoring for new joining cohorts.</li>
+        <li><strong>Explainability:</strong> ability to show top drivers behind the score (for trust and adoption).</li>
+      </ul>
+      <p class="disclaimer">
+        <em>Note:</em> Final model performance numbers (AUC, lift, precision/recall) can be inserted after final validation sign-off.
+      </p>
+    </section>
+
+    <section>
+      <h2>Challenges</h2>
+      <ul>
+        <li><strong>Data quality:</strong> missing or inconsistent contract/joining dates and identifiers in some records.</li>
+        <li><strong>Duplicates:</strong> repeated rows that can inflate counts if not removed carefully.</li>
+        <li><strong>Changing patterns:</strong> advisor behavior can shift across time due to policy/process changes.</li>
+        <li><strong>Fair comparison:</strong> avoiding “senior vs rookie” bias by using cohort/tenure rules.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Future Enhancements</h2>
+      <ul>
+        <li><strong>Intervention Playbook:</strong> recommended action types based on score and underlying drivers (low activity vs low conversion).</li>
+        <li><strong>Manager/Branch Signals:</strong> include coaching and branch effect to measure what support works best.</li>
+        <li><strong>Drift Monitoring:</strong> monthly checks to detect behavior shifts and maintain prediction quality.</li>
+        <li><strong>Quality Signals:</strong> go beyond counts to include conversion quality and pipeline outcomes.</li>
+        <li><strong>Automation:</strong> push prioritized lists directly into reporting and manager workflows.</li>
+      </ul>
+    </section>
+
+  </div>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Advisor Tipping Point | Rookie Performance Prediction</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
