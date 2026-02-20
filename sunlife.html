@@ -3,106 +3,265 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunlife</title>
+  <title>Advisor Tipping Point | Rookie Performance Prediction</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Sunlife</h1>
+    <h1>Advisor Tipping Point</h1>
 
     <section>
       <h2>Project Overview</h2>
       <p>
-        This project turns raw <strong>sunlife</strong> into early warnings and
-        clear actions. We model <em>trigger-symptom sequences</em> that typically precede
-        incidents and predict whether they will culminate in a <strong>Service Request (SR)</strong>
-        creation. The system continuously analyzes incoming signals, identifies risky
-        symptom chains, and surfaces <strong>proactive recommendations</strong> so engineers can
-        intervene before failure, reducing downtime and improving customer experience.
+        This project converts raw <strong>advisor onboarding + activity + performance</strong> data into
+        <strong>early performance signals</strong> and actionable insights. We predict whether a rookie
+        agent will become a <strong>High Performing Agent</strong> in <strong>months 4–6</strong>,
+        based on their <strong>first 3 months</strong> journey. The goal is simple: identify who needs
+        help early, and where to intervene (coaching, manager action, branch support) to improve
+        productivity and retention.
       </p>
     </section>
 
     <section>
-      <h2>Key Features</h2>
+      <h2>Contents</h2>
       <ul>
-        <li><strong>Sequence-Aware Detection:</strong> Learns patterns where <em>trigger symptoms</em> form a chain that commonly leads to SR creation.</li>
-        <li><strong>Hybrid Modeling:</strong> Uses <em>Hidden Markov Models (HMM)</em> to encode temporal state transitions and an <em>XGBoost</em> meta-classifier to score failure risk.</li>
-        <li><strong>Proactive Alerts:</strong> Generates early warnings with recommended next actions (e.g., component check, firmware update, workload throttle).</li>
-        <li><strong>Operational Integration:</strong> Publishes insights to dashboards (e.g., Power BI) and pushes notifications to on-call workflows.</li>
-        <li><strong>Explainability:</strong> Highlights top symptoms, state transitions, and features contributing to risk scores.</li>
-        <li><strong>Scalable Ingestion:</strong> Handles high-frequency telemetry from many devices with streaming-friendly preprocessing.</li>
+        <li>Introduction</li>
+        <li>Objective</li>
+        <li>Data Sources</li>
+        <li>Model Design</li>
+        <li>Data Preprocessing</li>
+        <li>Data Filtering</li>
+        <li>Data Cleaning</li>
+        <li>Data Transformation</li>
+        <li>Exploratory Data Analysis</li>
+        <li>Feature Selection</li>
+        <li>Modelling</li>
+        <li>Model Eligibility</li>
+        <li>Model Input</li>
+        <li>Model Results</li>
+        <li>Feature Importance</li>
       </ul>
     </section>
 
     <section>
-      <h2>Technologies and Tools</h2>
-      <ul>
-        <li><strong>Programming:</strong> Python</li>
-        <li><strong>Sequence Modeling:</strong> Hidden Markov Models (hmmlearn / custom), n‑gram & duration features</li>
-        <li><strong>Meta Classifier:</strong> XGBoost (gradient boosted trees)</li>
-        <li><strong>Data Processing:</strong> Pandas, NumPy (windowing, sequence builds, feature stores)</li>
-        <li><strong>Visualization & Ops:</strong> Power BI dashboards; alerting via webhooks</li>
-        <li><strong>Storage:</strong> SQL warehouse; Excel exports for legacy reporting</li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>Problem Statement</h2>
+      <h2>Objective</h2>
       <p>
-        In complex systems, failures rarely appear as isolated events—they are preceded by
-        <strong>symptom sequences</strong>. Without modeling the order and timing of these signals,
-        teams react late, miss SLAs, and open SRs only after customer impact. We needed a
-        solution that <em>understands temporal patterns</em> in telemetry, predicts likely SR
-        creation ahead of time, and prescribes the most effective preventative action.
+        Predict <strong>agent performance for months 4–6</strong> using their <strong>first 3 months</strong>
+        performance and activity signals, so the business can take proactive actions to improve
+        <strong>productivity</strong> and <strong>retention</strong>.
       </p>
     </section>
 
     <section>
-      <h2>Solution Approach</h2>
+      <h2>Data Sources</h2>
+      <p><strong>Raw Data (S3):</strong> Monthly refresh inputs were sourced from the following datasets.</p>
+      <ul>
+        <li><strong>indv_pol_t (Performance Data):</strong> s3://slf-aws-asia-analytics-processed-zone-ph-prod/Advisor_Tipping_Point/_monthly_refresh</li>
+        <li><strong>indv_cov (Performance Data):</strong> s3://slf-aws-asia-analytics-processed-zone-ph-prod/Advisor_Tipping_Point/_monthly_refresh</li>
+        <li><strong>cif_agnt_master (Agent Master):</strong> s3://slf-aws-asia-analytics-processed-zone-ph-prod/Advisor_Tipping_Point/_monthly_refresh</li>
+        <li><strong>raw_baseline_ac (AC Performance Data):</strong> s3://slf-aws-asia-analytics-processed-zone-ph-prod/Advisor_Tipping_Point/_monthly_refresh</li>
+        <li><strong>proposal_online (Activity Data):</strong> s3://slf-aws-asia-analytics-processed-zone-ph-prod/Advisor_Tipping_Point/_monthly_refresh</li>
+        <li><strong>proposal_offline (Activity Data):</strong> s3://slf-aws-asia-analytics-processed-zone-ph-prod/Advisor_Tipping_Point/_monthly_refresh</li>
+      </ul>
+
+      <p><strong>Required Columns (high level):</strong></p>
+      <ul>
+        <li><strong>indv_pol_t / indv_cov:</strong> pol_id, serv_agt_id, cvg_num, cvg_stat_cd, pol_bill_mode_cd, pol_bill_typ_cd, pol_tprem_amt, cvg_iss_eff_dt, pol_iss_eff_dt</li>
+        <li><strong>CIF_AGENT_MASTER:</strong> agnt_cd, agnt_cntrct_orig_dt, agnt_cntrct_start_dt, agnt_cntrct_end_dt, agnt_stat_cd</li>
+        <li><strong>raw_baseline_ac:</strong> agent_code, classification_code, status_code, status_name, status_effective_date, total_ac, ac_date</li>
+        <li><strong>AWARDS_Cur_Medallion_2021_2024:</strong> agent_code, award_received, award_date</li>
+        <li><strong>proposal_online / proposal_offline:</strong> Advisor Code, Activity, Mode, Activity Date</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Model Design</h2>
       <p>
-        We build sequences from incoming telemetry and detect <em>trigger chains</em> using an
-        <strong>HMM</strong> to map observed symptoms to hidden health states (Healthy → Degraded →
-        Critical). The per-sequence state probabilities, dwell times, and transition
-        statistics are then fed into an <strong>XGBoost</strong> meta-classifier to predict the
-        probability of <strong>SR creation within a lead window</strong> (e.g., next 24–72 hours).
-        The system outputs risk scores, top contributing symptoms, and <em>action playbooks</em>.
+        The model uses a <strong>cohort-based structure</strong> instead of a flat dataset. Agents are grouped
+        into <strong>quarterly cohorts</strong> based on tenure, and each agent has <strong>one row</strong>
+        representing their rookie journey (first 3 months).
       </p>
       <ul>
-        <li><strong>Sequence Construction:</strong> sliding windows, event bucketing, inter‑arrival gaps, and symptom n‑grams.</li>
-        <li><strong>HMM Features:</strong> state posteriors, transition likelihoods, dwell times, and last state change recency.</li>
-        <li><strong>Meta Features:</strong> recency counts, velocity/acceleration of KPIs, seasonality flags, device cohort stats.</li>
-        <li><strong>Classifier Output:</strong> P(SR | sequence), lead time band, and mitigation suggestions.</li>
+        <li><strong>Cohorts:</strong> Created quarterly based on tenure completion.</li>
+        <li><strong>Example:</strong> March 2023 cohort includes agents who completed 3 months tenure as of March 2023.</li>
+        <li><strong>Lifecycle:</strong> Agents stay in cohorts until they complete <strong>4 months</strong>, then are excluded.</li>
+        <li><strong>Training:</strong> Cohorts 1–7 (March 2023 to September 2024).</li>
+        <li><strong>Testing:</strong> Cohorts 8–9 (December 2024 and March 2025) as unseen test sets.</li>
       </ul>
     </section>
 
     <section>
-      <h2>Results</h2>
+      <h2>Data Preprocessing</h2>
+      <p>
+        Data was prepared from three major categories to build a clean, consistent input layer for modelling.
+      </p>
       <ul>
-        <li><strong>Early Warnings:</strong> Identified high‑risk chains with meaningful lead time for intervention.</li>
-        <li><strong>Reduced Reactive SRs:</strong> Fewer surprise SRs as teams acted on proactive alerts.</li>
-        <li><strong>Operational Efficiency:</strong> Shorter triage cycles and clearer ownership via recommended actions.</li>
-        <li><strong>Stakeholder Confidence:</strong> Transparent explanations (top symptoms/paths) built trust in the model.</li>
+        <li><strong>Agent Data:</strong> Contract dates, manager code, branch code, status</li>
+        <li><strong>Performance Data:</strong> Policy info, AC date, AC numbers, issue dates</li>
+        <li><strong>Activity Data:</strong> Proposal mode, proposal date, proposal ID</li>
       </ul>
-      <p class="disclaimer"><em>Note:</em> Exact metrics (precision/recall, lead‑time lift) can be added for the target environment once validated.</p>
+    </section>
+
+    <section>
+      <h2>Data Filtering</h2>
+      <ul>
+        <li><strong>Drop invalid records:</strong> Remove agents with missing codes/dates or same hire and termination date.</li>
+        <li><strong>Analysis window:</strong> Keep agents hired between <strong>Jan 1, 2023</strong> and <strong>Mar 31, 2025</strong>.</li>
+        <li><strong>Tenure rule:</strong> Include only agents with <strong>3 months tenure</strong> in a cohort.</li>
+        <li><strong>Cohort rule:</strong> One row per agent per cohort; no duplicate entries.</li>
+        <li><strong>Performance label logic:</strong> High performer defined using <strong>AC ≥ 15,000/month</strong> for a target month.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Data Cleaning</h2>
+      <ul>
+        <li><strong>Remove duplicates:</strong> Drop exact duplicate rows.</li>
+        <li><strong>Fix data types:</strong> Convert dates, numeric fields, and flags into correct formats.</li>
+        <li><strong>Handle missing values:</strong> Impute missing values in critical fields (hire date, performance).</li>
+        <li><strong>Hiring/End date correction:</strong> Create updated hiring date and contract end date where source values were incorrect.</li>
+        <li><strong>Drop irrelevant columns:</strong> Remove non-usable / non-required columns for analysis and modelling.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Data Transformation</h2>
+      <ul>
+        <li><strong>Create Cohorts:</strong> Quarterly cohort creation based on tenure (not a flat dataset).</li>
+        <li><strong>Create Tenure:</strong> Tenure days/months between hire date and cohort date.</li>
+        <li><strong>Create Label:</strong> Target = 1 if AC ≥ 15,000 in the target month, else 0.</li>
+        <li><strong>Log/Scaling transforms:</strong> Apply transformations on AC/AFYP/policies/proposals to reduce skew.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Exploratory Data Analysis</h2>
+      <p>
+        EDA focuses on understanding rookie behavior patterns in the first three months: growth curves in AC/AFYP,
+        activity momentum via proposals, and how early wins correlate with months 4–6 success.
+      </p>
+      <ul>
+        <li>Rookie month-wise AC/AFYP distribution checks</li>
+        <li>Proposal activity frequency and mode split (online/offline)</li>
+        <li>Cohort trends over time and drift checks (policy/process changes)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Feature Selection</h2>
+      <p>
+        Feature selection ensured we retained only meaningful variables with consistent influence on prediction quality.
+        We used a two-stage approach: <strong>statistical filtering</strong> first, then <strong>ML-based importance</strong>
+        methods to validate and rank.
+      </p>
+
+      <h3>Statistical Methods</h3>
+      <ul>
+        <li><strong>Univariate analysis:</strong> Remove low-variance / irrelevant features.</li>
+        <li><strong>Bivariate analysis:</strong> Check relationship of each feature with target.</li>
+        <li><strong>Multicollinearity checks:</strong> Remove highly correlated variables.</li>
+        <li><strong>Correlation matrix:</strong> Visual map to reduce duplicate signals.</li>
+      </ul>
+
+      <h3>ML-Based Feature Importance Methods</h3>
+      <ul>
+        <li><strong>SHAP:</strong> Explain feature impact per prediction.</li>
+        <li><strong>Random Forest importance</strong></li>
+        <li><strong>XGBoost importance</strong></li>
+        <li><strong>Gradient Boosting (GBC) importance</strong></li>
+        <li><strong>LightGBM (LGBM) importance</strong></li>
+        <li><strong>CatBoost importance</strong></li>
+      </ul>
+
+      <p>
+        <strong>Impact:</strong> Reduced noise, improved stability, and retained features with repeatable predictive value
+        across cohorts and unseen test data.
+      </p>
+    </section>
+
+    <section>
+      <h2>Modelling</h2>
+      <p>
+        The model categorizes rookie agents into two groups based on likelihood of becoming a high performer.
+        The evaluation metric used was <strong>AUC (Area Under the Curve)</strong>.
+      </p>
+
+      <p><strong>Target Definition:</strong></p>
+      <ul>
+        <li><strong>1 = High Performing Agent:</strong> AC ≥ 15,000 per month</li>
+        <li><strong>0 = Others:</strong> AC &lt; 15,000 per month</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Model Eligibility</h2>
+      <p>
+        Agents must have tenure of <strong>more than 3 months</strong> and <strong>less than 4 months</strong>
+        to be eligible. Agents beyond 4 months are excluded from this model.
+      </p>
+    </section>
+
+    <section>
+      <h2>Model Input</h2>
+      <p>
+        The model used <strong>12 core features</strong> capturing month 1–3 performance and activity volume.
+      </p>
+      <ul>
+        <li><strong>month_1_ac:</strong> Total AC in month 1</li>
+        <li><strong>month_2_ac:</strong> Total AC in month 2</li>
+        <li><strong>month_3_ac:</strong> Total AC in month 3</li>
+        <li><strong>month_1_afyp:</strong> Total AFYP in month 1</li>
+        <li><strong>month_2_afyp:</strong> Total AFYP in month 2</li>
+        <li><strong>month_3_afyp:</strong> Total AFYP in month 3</li>
+        <li><strong>month_1_policies:</strong> Total policies in month 1</li>
+        <li><strong>month_2_policies:</strong> Total policies in month 2</li>
+        <li><strong>month_3_policies:</strong> Total policies in month 3</li>
+        <li><strong>month_1_proposal:</strong> Total proposals in month 1</li>
+        <li><strong>month_2_proposal:</strong> Total proposals in month 2</li>
+        <li><strong>month_3_proposal:</strong> Total proposals in month 3</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Model Results</h2>
+      <ul>
+        <li><strong>Risk Scoring:</strong> Outputs probability that an agent will be High Performing in months 4–6.</li>
+        <li><strong>Cohort Validation:</strong> Performance validated on unseen cohorts (Dec 2024, Mar 2025).</li>
+        <li><strong>Business Use:</strong> Enables targeted coaching, manager attention, and branch-level interventions.</li>
+      </ul>
+      <p class="disclaimer"><em>Note:</em> Insert final AUC, precision/recall, and lift metrics after final validation in the target environment.</p>
+    </section>
+
+    <section>
+      <h2>Feature Importance</h2>
+      <p>
+        The most influential signals typically come from early momentum:
+        strong month-2/month-3 AC and AFYP trends, and consistent activity via proposals. Use SHAP plots and
+        model-specific importance charts to explain drivers to stakeholders.
+      </p>
+      <ul>
+        <li><strong>SHAP Summary Plot:</strong> Global driver ranking + directionality</li>
+        <li><strong>Model Gain/Impurity:</strong> XGBoost / RF feature rankings</li>
+        <li><strong>Cohort Stability Check:</strong> Confirm top drivers remain consistent across cohorts</li>
+      </ul>
     </section>
 
     <section>
       <h2>Challenges</h2>
       <p>
-        Key challenges included sparse/fragmented symptom logs, aligning clocks across sources,
-        handling non-stationary behavior after firmware changes, and balancing early alerts
-        with false positives. We iterated on sequence definitions, HMM state counts, class
-        weights, and thresholding policies to optimize <em>lead time vs. accuracy</em> trade‑offs.
+        Main challenges included invalid or missing agent contract dates, inconsistent date formats,
+        duplicate records, and changes in behavior patterns across cohorts. The cohort-based design helped
+        maintain fairness in comparisons and reduced leakage across tenure stages.
       </p>
     </section>
 
     <section>
       <h2>Future Enhancements</h2>
       <ul>
-        <li>Incorporate <strong>cost‑aware thresholds</strong> based on SLA penalties and service costs.</li>
-        <li>Add <strong>online learning</strong> to adapt HMM and XGBoost to drift and new symptom codes.</li>
-        <li>Extend to <strong>multivariate state‑space models</strong> and attention‑based sequence encoders.</li>
-        <li>Tighten <strong>closed‑loop automation</strong>: auto‑open preventative tasks when risk exceeds policy.</li>
+        <li>Add <strong>manager/branch effect features</strong> to capture coaching influence.</li>
+        <li>Introduce <strong>drift monitoring</strong> by cohort to detect changes in rookie behavior.</li>
+        <li>Expand features to include <strong>quality of activity</strong>, not just count (proposal outcomes, conversion).</li>
+        <li>Automate <strong>intervention playbooks</strong> (who to call, what to coach, next best action).</li>
       </ul>
     </section>
   </div>
