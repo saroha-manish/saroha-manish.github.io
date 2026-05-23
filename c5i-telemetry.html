@@ -5,6 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Telemetry Failure Prediction & Proactive SR Automation</title>
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-top: 8px solid #febe10;
+    }
+
+    h1 {
+      font-size: 34px;
+      color: #003b5c;
+      margin-bottom: 32px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    section {
+      margin-bottom: 34px;
+      padding: 24px;
+      border-radius: 16px;
+      background: #f9fafb;
+      border-left: 6px solid #febe10;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #003b5c;
+      margin-bottom: 14px;
+      font-weight: 800;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #374151;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #374151;
+    }
+
+    strong {
+      color: #003b5c;
+      font-weight: 700;
+    }
+
+    em {
+      color: #374151;
+    }
+
+    section:nth-of-type(2) ul,
+    section:nth-of-type(3) ul,
+    section:nth-of-type(5) ul,
+    section:nth-of-type(6) ul,
+    section:nth-of-type(8) ul {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    section:nth-of-type(2) li,
+    section:nth-of-type(3) li,
+    section:nth-of-type(5) li,
+    section:nth-of-type(6) li,
+    section:nth-of-type(8) li {
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      margin-bottom: 0;
+    }
+
+    section:nth-of-type(6) {
+      background: #003b5c;
+      border-left: 6px solid #febe10;
+    }
+
+    section:nth-of-type(6) h2 {
+      color: #febe10;
+    }
+
+    section:nth-of-type(6) li {
+      background: #ffffff;
+      color: #374151;
+    }
+
+    section:nth-of-type(6) .disclaimer {
+      color: #ffffff;
+      margin-top: 18px;
+      margin-bottom: 0;
+    }
+
+    section:nth-of-type(6) .disclaimer em {
+      color: #ffffff;
+    }
+
+    section:last-of-type {
+      background: #fff8db;
+      border-left: 6px solid #f3d66b;
+      border: 1px solid #f3d66b;
+    }
+
+    section:last-of-type h2 {
+      color: #003b5c;
+    }
+
+    section:last-of-type li {
+      background: #ffffff;
+    }
+
+    section:last-of-type p {
+      color: #374151;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      section:nth-of-type(2) ul,
+      section:nth-of-type(3) ul,
+      section:nth-of-type(5) ul,
+      section:nth-of-type(6) ul,
+      section:nth-of-type(8) ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -38,7 +207,7 @@
       <h2>Technologies and Tools</h2>
       <ul>
         <li><strong>Programming:</strong> Python</li>
-        <li><strong>Sequence Modeling:</strong> Hidden Markov Models (hmmlearn / custom), n‑gram & duration features</li>
+        <li><strong>Sequence Modeling:</strong> Hidden Markov Models (hmmlearn / custom), n-gram & duration features</li>
         <li><strong>Meta Classifier:</strong> XGBoost (gradient boosted trees)</li>
         <li><strong>Data Processing:</strong> Pandas, NumPy (windowing, sequence builds, feature stores)</li>
         <li><strong>Visualization & Ops:</strong> Power BI dashboards; alerting via webhooks</li>
@@ -68,7 +237,7 @@
         The system outputs risk scores, top contributing symptoms, and <em>action playbooks</em>.
       </p>
       <ul>
-        <li><strong>Sequence Construction:</strong> sliding windows, event bucketing, inter‑arrival gaps, and symptom n‑grams.</li>
+        <li><strong>Sequence Construction:</strong> sliding windows, event bucketing, inter-arrival gaps, and symptom n-grams.</li>
         <li><strong>HMM Features:</strong> state posteriors, transition likelihoods, dwell times, and last state change recency.</li>
         <li><strong>Meta Features:</strong> recency counts, velocity/acceleration of KPIs, seasonality flags, device cohort stats.</li>
         <li><strong>Classifier Output:</strong> P(SR | sequence), lead time band, and mitigation suggestions.</li>
@@ -78,12 +247,12 @@
     <section>
       <h2>Results</h2>
       <ul>
-        <li><strong>Early Warnings:</strong> Identified high‑risk chains with meaningful lead time for intervention.</li>
+        <li><strong>Early Warnings:</strong> Identified high-risk chains with meaningful lead time for intervention.</li>
         <li><strong>Reduced Reactive SRs:</strong> Fewer surprise SRs as teams acted on proactive alerts.</li>
         <li><strong>Operational Efficiency:</strong> Shorter triage cycles and clearer ownership via recommended actions.</li>
         <li><strong>Stakeholder Confidence:</strong> Transparent explanations (top symptoms/paths) built trust in the model.</li>
       </ul>
-      <p class="disclaimer"><em>Note:</em> Exact metrics (precision/recall, lead‑time lift) can be added for the target environment once validated.</p>
+      <p class="disclaimer"><em>Note:</em> Exact metrics (precision/recall, lead-time lift) can be added for the target environment once validated.</p>
     </section>
 
     <section>
@@ -92,17 +261,17 @@
         Key challenges included sparse/fragmented symptom logs, aligning clocks across sources,
         handling non-stationary behavior after firmware changes, and balancing early alerts
         with false positives. We iterated on sequence definitions, HMM state counts, class
-        weights, and thresholding policies to optimize <em>lead time vs. accuracy</em> trade‑offs.
+        weights, and thresholding policies to optimize <em>lead time vs. accuracy</em> trade-offs.
       </p>
     </section>
 
     <section>
       <h2>Future Enhancements</h2>
       <ul>
-        <li>Incorporate <strong>cost‑aware thresholds</strong> based on SLA penalties and service costs.</li>
+        <li>Incorporate <strong>cost-aware thresholds</strong> based on SLA penalties and service costs.</li>
         <li>Add <strong>online learning</strong> to adapt HMM and XGBoost to drift and new symptom codes.</li>
-        <li>Extend to <strong>multivariate state‑space models</strong> and attention‑based sequence encoders.</li>
-        <li>Tighten <strong>closed‑loop automation</strong>: auto‑open preventative tasks when risk exceeds policy.</li>
+        <li>Extend to <strong>multivariate state-space models</strong> and attention-based sequence encoders.</li>
+        <li>Tighten <strong>closed-loop automation</strong>: auto-open preventative tasks when risk exceeds policy.</li>
       </ul>
     </section>
   </div>
