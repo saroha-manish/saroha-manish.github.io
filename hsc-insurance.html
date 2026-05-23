@@ -5,6 +5,175 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Insurance Churn Prediction & Retention Activation</title>
   <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-top: 8px solid #febe10;
+    }
+
+    h1 {
+      font-size: 34px;
+      color: #003b5c;
+      margin-bottom: 32px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    section {
+      margin-bottom: 34px;
+      padding: 24px;
+      border-radius: 16px;
+      background: #f9fafb;
+      border-left: 6px solid #febe10;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #003b5c;
+      margin-bottom: 14px;
+      font-weight: 800;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #374151;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #374151;
+    }
+
+    strong {
+      color: #003b5c;
+      font-weight: 700;
+    }
+
+    em {
+      color: #374151;
+    }
+
+    section:nth-of-type(2) ul,
+    section:nth-of-type(3) ul,
+    section:nth-of-type(5) ul,
+    section:nth-of-type(6) ul,
+    section:nth-of-type(8) ul {
+      list-style: none;
+      padding-left: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    section:nth-of-type(2) li,
+    section:nth-of-type(3) li,
+    section:nth-of-type(5) li,
+    section:nth-of-type(6) li,
+    section:nth-of-type(8) li {
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      margin-bottom: 0;
+    }
+
+    section:nth-of-type(6) {
+      background: #003b5c;
+      border-left: 6px solid #febe10;
+    }
+
+    section:nth-of-type(6) h2 {
+      color: #febe10;
+    }
+
+    section:nth-of-type(6) li {
+      background: #ffffff;
+      color: #374151;
+    }
+
+    section:nth-of-type(6) .disclaimer {
+      color: #ffffff;
+      margin-top: 18px;
+      margin-bottom: 0;
+    }
+
+    section:nth-of-type(6) .disclaimer em {
+      color: #ffffff;
+    }
+
+    section:last-of-type {
+      background: #fff8db;
+      border-left: 6px solid #f3d66b;
+      border: 1px solid #f3d66b;
+    }
+
+    section:last-of-type h2 {
+      color: #003b5c;
+    }
+
+    section:last-of-type li {
+      background: #ffffff;
+    }
+
+    section:last-of-type p {
+      color: #374151;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      section:nth-of-type(2) ul,
+      section:nth-of-type(3) ul,
+      section:nth-of-type(5) ul,
+      section:nth-of-type(6) ul,
+      section:nth-of-type(8) ul {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -28,7 +197,7 @@
         <li><strong>Risk Scoring:</strong> Per-policy churn probability and tiered risk bands (Low/Med/High).</li>
         <li><strong>Robust Modeling:</strong> <em>Logistic Regression</em> baseline with calibrated probabilities; <em>XGBoost</em>/<em>Random Forest</em> for higher recall at similar precision.</li>
         <li><strong>Imbalance Handling:</strong> Class weights / SMOTE and <em>threshold tuning</em> for recall-focused targeting.</li>
-        <li><strong>Explainability:</strong> Top drivers via coefficients/feature importances and SHAP plots for high‑risk cohorts.</li>
+        <li><strong>Explainability:</strong> Top drivers via coefficients/feature importances and SHAP plots for high-risk cohorts.</li>
         <li><strong>Operational Integration:</strong> Scores pushed to CRM and shown in <em>Power BI</em> with filters for region/segment/agent.</li>
         <li><strong>A/B Friendly:</strong> Buckets customers by uplift hypothesis to enable controlled retention experiments.</li>
       </ul>
@@ -38,7 +207,7 @@
       <h2>Technologies and Tools</h2>
       <ul>
         <li><strong>Programming:</strong> Python</li>
-        <li><strong>Modeling:</strong> scikit‑learn (Logistic Regression, Random Forest), XGBoost</li>
+        <li><strong>Modeling:</strong> scikit-learn (Logistic Regression, Random Forest), XGBoost</li>
         <li><strong>Data Processing:</strong> Pandas, NumPy (feature pipelines, leakage guards)</li>
         <li><strong>Visualization & Ops:</strong> Power BI dashboards; exports/webhooks to CRM</li>
         <li><strong>Storage:</strong> SQL warehouse; CSV/Excel extracts for ops teams</li>
@@ -51,7 +220,7 @@
         Churn is concentrated around <strong>renewal</strong> but difficult to prevent without early
         signals. Agents lack a prioritized list and often spend effort on customers unlikely to
         churn, missing those at genuine risk. We needed <em>reliable, interpretable churn scores</em>
-        with clear actions to <strong>reduce attrition</strong> cost‑effectively.
+        with clear actions to <strong>reduce attrition</strong> cost-effectively.
       </p>
     </section>
 
@@ -59,23 +228,23 @@
       <h2>Solution Approach</h2>
       <p>
         We assembled features from policy, billing, and service systems (tenure, premium,
-        payment frequency, auto‑debit, late‑payments, claims, endorsements, complaints, channel,
+        payment frequency, auto-debit, late-payments, claims, endorsements, complaints, channel,
         city tier). After leakage checks and stratified splits, we trained a calibrated
         <strong>Logistic Regression</strong> and a tuned <strong>XGBoost</strong>/<strong>Random Forest</strong>. We optimized
-        <em>precision‑recall trade‑offs</em> via thresholding aligned to retention capacity and cost.
+        <em>precision-recall trade-offs</em> via thresholding aligned to retention capacity and cost.
       </p>
       <ul>
-        <li><strong>Feature Pipeline:</strong> missing‑value imputation, one‑hot encoding, scaling where needed.</li>
+        <li><strong>Feature Pipeline:</strong> missing-value imputation, one-hot encoding, scaling where needed.</li>
         <li><strong>Calibration:</strong> probability calibration for rank ordering stability across cohorts.</li>
         <li><strong>Thresholding:</strong> choose operating point (e.g., P(churn) ≥ 0.4) to maximize saved revenue per contact.</li>
-        <li><strong>Activation:</strong> push high‑risk lists + reason codes to CRM; Power BI slices for agent/region.</li>
+        <li><strong>Activation:</strong> push high-risk lists + reason codes to CRM; Power BI slices for agent/region.</li>
       </ul>
     </section>
 
     <section>
       <h2>Results</h2>
       <ul>
-        <li><strong>Model Quality:</strong> ROC‑AUC <strong>0.90</strong>, F1 <strong>0.78</strong>, Recall <strong>0.82</strong> at tuned threshold.</li>
+        <li><strong>Model Quality:</strong> ROC-AUC <strong>0.90</strong>, F1 <strong>0.78</strong>, Recall <strong>0.82</strong> at tuned threshold.</li>
         <li><strong>Business Impact:</strong> Targeted retention reduced churn by <strong>12–15%</strong> in pilot cohorts.</li>
         <li><strong>Operational Wins:</strong> Prioritized call lists and clear reason codes shortened outreach cycles.</li>
       </ul>
@@ -86,7 +255,7 @@
       <h2>Challenges</h2>
       <p>
         Addressed <strong>class imbalance</strong>, seasonal renewal spikes, potential <strong>data leakage</strong> from
-        post‑renewal events, and <strong>cold‑start</strong> customers with short tenures. We iterated on
+        post-renewal events, and <strong>cold-start</strong> customers with short tenures. We iterated on
         sampling, regularization, and segmentation to maintain stability across regions.
       </p>
     </section>
@@ -95,8 +264,8 @@
       <h2>Future Enhancements</h2>
       <ul>
         <li><strong>Uplift Modeling:</strong> Target customers with highest treatment effect, not just highest risk.</li>
-        <li><strong>Cost‑Aware Optimization:</strong> Thresholds based on contact cost vs. premium retained.</li>
-        <li><strong>Realtime Scoring:</strong> Stream scores near renewal events for same‑day agent action.</li>
+        <li><strong>Cost-Aware Optimization:</strong> Thresholds based on contact cost vs. premium retained.</li>
+        <li><strong>Realtime Scoring:</strong> Stream scores near renewal events for same-day agent action.</li>
         <li><strong>Explainability at Scale:</strong> SHAP summaries by agent/region for coaching and QA.</li>
       </ul>
     </section>
