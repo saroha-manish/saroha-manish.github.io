@@ -3,95 +3,397 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Agent Performance Early Prediction</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>AdvisorFit — Agent Recruitment and Top Performer Propensity Model</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-top: 8px solid #febe10;
+    }
+
+    h1 {
+      font-size: 34px;
+      color: #003b5c;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      font-size: 17px;
+      color: #4b5563;
+      margin-bottom: 32px;
+      max-width: 900px;
+    }
+
+    section {
+      margin-bottom: 34px;
+      padding: 24px;
+      border-radius: 16px;
+      background: #f9fafb;
+      border-left: 6px solid #febe10;
+    }
+
+    h2 {
+      font-size: 24px;
+      color: #003b5c;
+      margin-bottom: 14px;
+    }
+
+    p {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #374151;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #374151;
+    }
+
+    strong {
+      color: #003b5c;
+    }
+
+    .highlight {
+      color: #003b5c;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      color: #003b5c;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 15px;
+      margin-bottom: 0;
+    }
+
+    .tech-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .tech-item {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+    }
+
+    .impact-box {
+      background: #003b5c;
+      color: #ffffff;
+      padding: 22px;
+      border-radius: 16px;
+      margin-top: 18px;
+    }
+
+    .impact-box h3 {
+      color: #febe10;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .impact-box p {
+      color: #ffffff;
+      margin-bottom: 0;
+    }
+
+    .footer-note {
+      margin-top: 30px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #fff8db;
+      border: 1px solid #f3d66b;
+      color: #374151;
+      font-size: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      section {
+        padding: 18px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>Agent Recruitment and Performance Model</h1>
+
+    <h1>AdvisorFit — Agent Recruitment and Top Performer Propensity Model</h1>
+
+    <p class="subtitle">
+      A data-driven recruitment intelligence solution designed to identify high-potential advisor candidates early,
+      support recruiter decision-making, and validate candidate scores against real business outcomes.
+    </p>
 
     <section>
       <h2>Project Overview</h2>
       <p>
-        This project converts early agent activity data into actionable performance insights.
-        Using the first <strong>three months of agent performance</strong>, we predict whether a rookie
-        agent is likely to become a <strong>High Performing Agent (AC ≥ 15,000 per month)</strong>.
-        The system evaluates early sales momentum and provides probability scores to enable
-        proactive coaching, structured onboarding, and better workforce planning decisions.
+        Designed and developed <strong>AdvisorFit</strong>, an agent recruitment and top performer propensity model
+        that helps recruitment teams identify high-potential advisor candidates early in the hiring process.
+      </p>
+      <p>
+        The model uses candidate profile, background, work history, education, family, motivation, and selected
+        text-derived features to predict the probability of a recruit becoming a future top performer.
+      </p>
+      <p>
+        The solution is built as a <strong>decision-support tool</strong> for recruiters and managers. It helps them
+        prioritize candidates, ask better interview questions, and plan early coaching interventions without replacing
+        business judgment.
       </p>
     </section>
 
     <section>
       <h2>Key Features</h2>
-      <ul>
-        <li><strong>Cohort-Based Modeling:</strong> Agents grouped by tenure to ensure fair performance comparison.</li>
-        <li><strong>Early Momentum Detection:</strong> Uses AC, AFYP, policy count, and proposal activity from Month 1–3.</li>
-        <li><strong>Multi-Model Evaluation:</strong> Compared tree-based models and AutoML to select the most stable performer.</li>
-        <li><strong>Actionable Outputs:</strong> Generates probability scores and High Performer classification.</li>
-        <li><strong>Explainability:</strong> Identifies key early indicators influencing future success.</li>
-        <li><strong>Operational Integration:</strong> Outputs consumed via dashboards for manager-level monitoring.</li>
-      </ul>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Top Performer Propensity Scoring</h3>
+          <p>
+            Predicts the probability of a new recruit becoming a future top performer using application-stage data.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Business Decile Ranking</h3>
+          <p>
+            Ranks candidates into model-score deciles to create easy-to-understand high, medium, and low potential groups.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Early Sales Validation</h3>
+          <p>
+            Validates model deciles against first 90-day sales outcomes including AFYP, policy count, and days to first sale.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Retention Validation</h3>
+          <p>
+            Compares model deciles and actual sales deciles against 13-month retention and cancellation behavior.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Text Feature Engineering</h3>
+          <p>
+            Converts open-ended recruitment responses into structured features such as motivation, achievements,
+            entrepreneurship, and career vision.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Explainable Candidate Report</h3>
+          <p>
+            Generates recruiter-friendly reports with probability score, strengths, risk areas, interview focus points,
+            and final recommendation.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Pilot-Ready Batch Scoring</h3>
+          <p>
+            Supports batch scoring and candidate report generation for advisor candidates available in LBP.
+          </p>
+        </div>
+      </div>
     </section>
 
     <section>
       <h2>Technologies and Tools</h2>
-      <ul>
-        <li><strong>Programming:</strong> Python</li>
-        <li><strong>Modeling:</strong> Random Forest, XGBoost, LightGBM, CatBoost, AutoML (Neural Network)</li>
-        <li><strong>Data Processing:</strong> Pandas, NumPy</li>
-        <li><strong>Visualization:</strong> Power BI dashboards</li>
-        <li><strong>Storage:</strong> AWS S3 (processed data zone)</li>
-      </ul>
+
+      <div class="tech-list">
+        <div class="tech-item"><strong>Programming:</strong> Python</div>
+        <div class="tech-item"><strong>Modeling:</strong> CatBoost, XGBoost, LightGBM, AutoML experiments</div>
+        <div class="tech-item"><strong>Data Processing:</strong> Pandas, NumPy</div>
+        <div class="tech-item"><strong>Feature Engineering:</strong> Categorical encoding, text-derived features, decile analysis</div>
+        <div class="tech-item"><strong>Model Evaluation:</strong> ROC-AUC, lift, decile analysis, validation cohort analysis</div>
+        <div class="tech-item"><strong>Visualization:</strong> Matplotlib, Plotly, PowerPoint business charts</div>
+        <div class="tech-item"><strong>Storage:</strong> AWS S3 processed data zone</div>
+        <div class="tech-item"><strong>UI / Prototype:</strong> Streamlit-based AdvisorFit report interface</div>
+        <div class="tech-item"><strong>GenAI Integration:</strong> AWS Bedrock / LLM-based report generation prototype</div>
+      </div>
     </section>
 
     <section>
       <h2>Problem Statement</h2>
       <p>
-        In insurance sales organizations, performance assessment often happens too late.
-        Managers lack early signals to identify high-potential agents or intervene with
-        underperforming ones. We needed a <strong>reliable early prediction system</strong> that uses
-        initial performance data to identify future high performers and support data-driven
-        coaching strategies.
+        Recruitment teams often do not have enough structured early signals to identify which advisor candidates are
+        more likely to become strong performers. Traditional assessment depends heavily on manual judgment and business
+        experience, making it difficult to prioritize candidates consistently.
+      </p>
+      <p>
+        The business needed a data-driven solution that could support recruitment decisions, highlight candidate
+        potential, and provide clear interview guidance while keeping recruiter judgment at the center of the process.
       </p>
     </section>
 
     <section>
       <h2>Solution Approach</h2>
       <p>
-        Agents were structured into <strong>quarterly tenure-based cohorts</strong>.
-        For each agent, performance metrics from the first three months were captured and
-        used to train classification models predicting high performance outcomes.
-        Time-based validation ensured realistic performance measurement.
+        Built a supervised classification model to predict whether a recruit is likely to become a top performer.
+        The target was created from historical advisor performance categories, while leakage-prone fields such as
+        actual first-year performance, target category, identifiers, and post-outcome variables were excluded from
+        model training.
       </p>
+
       <ul>
-        <li><strong>Feature Engineering:</strong> Monthly AC, AFYP, policies, and proposal counts.</li>
-        <li><strong>Model Training:</strong> Supervised classification with time-based validation.</li>
-        <li><strong>Threshold Optimization:</strong> Balanced precision and recall for practical deployment.</li>
-        <li><strong>Deployment:</strong> Risk scores surfaced to dashboards for managerial action.</li>
+        <li>
+          <strong>Curated Feature Set:</strong> Used stable and interpretable features covering demographics,
+          work background, education, Sun Life relationship indicators, family background, and structured text-derived signals.
+        </li>
+        <li>
+          <strong>Probability Scoring:</strong> Converted model outputs into business-friendly top performer probability scores.
+        </li>
+        <li>
+          <strong>Decile-Based Interpretation:</strong> Grouped candidates into score deciles for easier business adoption.
+        </li>
+        <li>
+          <strong>Business Validation:</strong> Validated model deciles against first 90-day AFYP, policy count,
+          days to first sale, first 12-month AFYP, and 13-month retention.
+        </li>
+        <li>
+          <strong>Recruiter Report Prototype:</strong> Created a Streamlit-based interface explaining positive signals,
+          validation areas, interview recommendations, and final hiring guidance.
+        </li>
       </ul>
     </section>
 
     <section>
-      <h2>Results</h2>
+      <h2>Results & Business Impact</h2>
+
       <ul>
-        <li><strong>Strong Predictive Performance:</strong> Maintained stable accuracy and ROC-AUC on unseen cohorts.</li>
-        <li><strong>Early Differentiation:</strong> Successfully identified high-potential agents within 3 months.</li>
-        <li><strong>Balanced Precision & Recall:</strong> Optimized for practical business deployment.</li>
+        <li>
+          <strong>Model Ranking Validation:</strong> Higher model-score deciles showed stronger early sales and better
+          retention outcomes.
+        </li>
+        <li>
+          <strong>Early Sales Alignment:</strong> High model-score deciles generated higher first 90-day AFYP and
+          policy volume compared with low model-score deciles.
+        </li>
+        <li>
+          <strong>Actual Sales Validation:</strong> Advisors ranked in higher actual first 12-month AFYP deciles showed
+          stronger 13-month retention and lower cancellation.
+        </li>
+        <li>
+          <strong>First 90-Day Insight:</strong> Advisors with stronger first 3-month AFYP showed materially better
+          13-month retention, confirming early sales behavior as a strong business signal.
+        </li>
+        <li>
+          <strong>Top Performer Behavior Pattern:</strong> Actual top performers were more likely to make their first
+          sale early and build policy volume within the first 90 days.
+        </li>
+        <li>
+          <strong>Business Adoption Direction:</strong> The business preferred a batch-service pilot using current
+          advisor candidates available in LBP, with possible movement to an enterprise application after pilot validation.
+        </li>
       </ul>
-      
-      </p>
+
+      <div class="impact-box">
+        <h3>Business Value</h3>
+        <p>
+          AdvisorFit converts recruitment data into actionable candidate intelligence, helping managers prioritize
+          high-potential candidates, identify validation areas early, and make more consistent recruitment decisions.
+        </p>
+      </div>
     </section>
 
     <section>
       <h2>Challenges</h2>
-      <p>
-        Addressed class imbalance, ensured strict time-based validation to prevent data leakage,
-        managed cohort alignment issues, and balanced model complexity with explainability for
-        leadership stakeholders.
-      </p>
+
+      <ul>
+        <li>
+          <strong>Data Leakage Prevention:</strong> Removed outcome-related and post-performance variables such as
+          actual first-year performance, category fields, and direct identifiers from model training.
+        </li>
+        <li>
+          <strong>Feature Consistency:</strong> Handled missing values, unknown categories, text-derived features,
+          and high-cardinality fields carefully to maintain model stability.
+        </li>
+        <li>
+          <strong>Metric Definition Alignment:</strong> Validated that first 3-month and first 12-month AFYP were
+          calculated from the same policy source to avoid incorrect business interpretation.
+        </li>
+        <li>
+          <strong>Retention Logic:</strong> Worked with business to confirm advisor status definitions such as Active,
+          Cancelled, Deceased, and Vested before calculating 13-month retention and cancellation.
+        </li>
+        <li>
+          <strong>Business Explainability:</strong> Translated model outputs into simple recruiter-friendly explanations,
+          avoiding black-box score interpretation.
+        </li>
+        <li>
+          <strong>Production Planning:</strong> Evaluated enterprise app, LBP integration, and batch-service pilot options
+          considering cost, feasibility, user experience, and technical dependencies.
+        </li>
+      </ul>
     </section>
 
-
+    <div class="footer-note">
+      <strong>Positioning Note:</strong>
+      This project should be presented as a recruitment decision-support system, not as an automated hiring decision engine.
+      The model supports prioritization, interview preparation, and early coaching planning while keeping final judgment
+      with recruiters and business leaders.
+    </div>
 
   </div>
 </body>
