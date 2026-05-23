@@ -5,6 +5,151 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HSC - customer churn</title>
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            color: #1f2937;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-top: 8px solid #febe10;
+        }
+
+        h1 {
+            font-size: 34px;
+            color: #003b5c;
+            margin-bottom: 32px;
+            line-height: 1.2;
+            font-weight: 800;
+        }
+
+        section {
+            margin-bottom: 34px;
+            padding: 24px;
+            border-radius: 16px;
+            background: #f9fafb;
+            border-left: 6px solid #febe10;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #003b5c;
+            margin-bottom: 14px;
+            font-weight: 800;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #374151;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #374151;
+        }
+
+        strong {
+            color: #003b5c;
+            font-weight: 700;
+        }
+
+        section:nth-of-type(2) ul,
+        section:nth-of-type(3) ul,
+        section:nth-of-type(6) ul {
+            list-style: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+            margin-top: 18px;
+        }
+
+        section:nth-of-type(2) li,
+        section:nth-of-type(3) li,
+        section:nth-of-type(6) li {
+            background: #ffffff;
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            margin-bottom: 0;
+        }
+
+        section:nth-of-type(6) {
+            background: #003b5c;
+            border-left: 6px solid #febe10;
+        }
+
+        section:nth-of-type(6) h2 {
+            color: #febe10;
+        }
+
+        section:nth-of-type(6) li {
+            background: #ffffff;
+            color: #374151;
+        }
+
+        section:last-of-type {
+            background: #fff8db;
+            border-left: 6px solid #f3d66b;
+            border: 1px solid #f3d66b;
+        }
+
+        section:last-of-type h2 {
+            color: #003b5c;
+        }
+
+        section:last-of-type p {
+            color: #374151;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 24px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 21px;
+            }
+
+            section {
+                padding: 18px;
+            }
+
+            section:nth-of-type(2) ul,
+            section:nth-of-type(3) ul,
+            section:nth-of-type(6) ul {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
