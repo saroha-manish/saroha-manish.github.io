@@ -1,206 +1,475 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FWA Risk-Ranking Model</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multi-Carrier Provider FWA Risk-Ranking Model</title>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f8;
-            color: #1f2937;
-            line-height: 1.6;
-        }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+      line-height: 1.6;
+    }
 
-        .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 18px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border-top: 8px solid #febe10;
-        }
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      border-top: 8px solid #febe10;
+    }
 
-        h1 {
-            font-size: 34px;
-            color: #003b5c;
-            margin-bottom: 32px;
-            line-height: 1.2;
-            font-weight: 800;
-        }
+    h1 {
+      font-size: 34px;
+      color: #003b5c;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
 
-        section {
-            margin-bottom: 34px;
-            padding: 24px;
-            border-radius: 16px;
-            background: #f9fafb;
-            border-left: 6px solid #febe10;
-        }
+    .subtitle {
+      font-size: 17px;
+      color: #4b5563;
+      margin-bottom: 32px;
+      max-width: 900px;
+    }
 
-        h2 {
-            font-size: 24px;
-            color: #003b5c;
-            margin-bottom: 14px;
-            font-weight: 800;
-        }
+    section {
+      margin-bottom: 34px;
+      padding: 24px;
+      border-radius: 16px;
+      background: #f9fafb;
+      border-left: 6px solid #febe10;
+    }
 
-        p {
-            font-size: 16px;
-            margin-bottom: 12px;
-            color: #374151;
-        }
+    h2 {
+      font-size: 24px;
+      color: #003b5c;
+      margin-bottom: 14px;
+    }
 
-        p:last-child {
-            margin-bottom: 0;
-        }
+    p {
+      font-size: 16px;
+      margin-bottom: 12px;
+      color: #374151;
+    }
 
-        ul {
-            padding-left: 20px;
-            margin-top: 10px;
-        }
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
 
-        li {
-            margin-bottom: 10px;
-            font-size: 16px;
-            color: #374151;
-        }
+    li {
+      margin-bottom: 10px;
+      font-size: 16px;
+      color: #374151;
+    }
 
-        strong {
-            color: #003b5c;
-            font-weight: 700;
-        }
+    strong {
+      color: #003b5c;
+    }
 
-        section:nth-of-type(2) ul,
-        section:nth-of-type(3) ul,
-        section:nth-of-type(6) ul {
-            list-style: none;
-            padding-left: 0;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 18px;
-            margin-top: 18px;
-        }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
 
-        section:nth-of-type(2) li,
-        section:nth-of-type(3) li,
-        section:nth-of-type(6) li {
-            background: #ffffff;
-            padding: 18px;
-            border-radius: 14px;
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
-            margin-bottom: 0;
-        }
+    .card {
+      background: #ffffff;
+      padding: 18px;
+      border-radius: 14px;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
 
-        section:nth-of-type(6) {
-            background: #003b5c;
-            border-left: 6px solid #febe10;
-        }
+    .card h3 {
+      font-size: 18px;
+      color: #003b5c;
+      margin-bottom: 8px;
+    }
 
-        section:nth-of-type(6) h2 {
-            color: #febe10;
-        }
+    .card p {
+      font-size: 15px;
+      margin-bottom: 0;
+    }
 
-        section:last-of-type {
-            background: #fff8db;
-            border-left: 6px solid #f3d66b;
-            border: 1px solid #f3d66b;
-        }
+    .tech-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
 
-        @media (max-width: 768px) {
-            .container {
-                margin: 20px;
-                padding: 24px;
-            }
+    .tech-item {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 14px;
+      font-size: 15px;
+    }
 
-            h1 {
-                font-size: 28px;
-            }
+    .impact-box {
+      background: #003b5c;
+      color: #ffffff;
+      padding: 22px;
+      border-radius: 16px;
+      margin-top: 18px;
+    }
 
-            h2 {
-                font-size: 21px;
-            }
+    .impact-box h3 {
+      color: #febe10;
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
 
-            section {
-                padding: 18px;
-            }
+    .impact-box p {
+      color: #ffffff;
+      margin-bottom: 0;
+    }
 
-            section:nth-of-type(2) ul,
-            section:nth-of-type(3) ul,
-            section:nth-of-type(6) ul {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    .footer-note {
+      margin-top: 30px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #fff8db;
+      border: 1px solid #f3d66b;
+      color: #374151;
+      font-size: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px;
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      section {
+        padding: 18px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>FWA RISK-RANKING MODEL</h1>
+  <div class="container">
 
-        <section>
-            <h2>Project Overview</h2>
-            <p>Developed an explainable machine learning model to rank medical billing providers by fraud, waste, and abuse (FWA) risk in auto casualty claims. Using approximately 806 million bill lines from multiple insurance carriers, the model scored 298,000 providers and gave investigators a prioritized worklist with risk tiers and reasons behind each score. It achieved a 0.758 PR-AUC and a 68.8% hit rate among the top 10% of ranked providers.</p>
-        </section>
+    <h1>Multi-Carrier Provider FWA Risk-Ranking Model</h1>
 
-        <section>
-            <h2>Key Features</h2>
-            <ul>
-                <li><strong>Cross-Carrier Risk Detection:</strong> Identified billing patterns across multiple insurers that may be difficult to detect from a single carrier’s data.</li>
-                <li><strong>Provider Risk Ranking:</strong> Assigned providers a risk score and tier to help investigators prioritize reviews.</li>
-                <li><strong>Explainable Predictions:</strong> Used SHAP to show the strongest factors contributing to each provider’s score.</li>
-                <li><strong>Operational Integration:</strong> Produced a regularly updated worklist for Special Investigations Unit (SIU) teams.</li>
-            </ul>
-        </section>
+    <p class="subtitle">
+      An explainable machine learning solution that uses cross-carrier medical billing patterns
+      to prioritize providers for fraud, waste, and abuse investigation.
+    </p>
 
-        <section>
-            <h2>Technologies and Tools</h2>
-            <ul>
-                <li><strong>Programming Language:</strong> Python</li>
-                <li><strong>Data Platform:</strong> Snowflake and SQL</li>
-                <li><strong>Machine Learning:</strong> XGBoost, LightGBM, Random Forest, Logistic Regression</li>
-                <li><strong>Explainability:</strong> SHAP</li>
-                <li><strong>Model Development:</strong> Feature engineering, cross-validation, and hyperparameter tuning</li>
-            </ul>
-        </section>
+    <section>
+      <h2>Project Overview</h2>
 
-        <section>
-            <h2>Problem Statement</h2>
-            <p>Investigators had limited capacity to review large volumes of medical billing activity. Fraud reviews were often reactive, and billing across different carriers made suspicious provider behavior harder to identify. The business needed a consistent way to prioritize providers for investigation before further payments were made.</p>
-        </section>
+      <p>
+        Developed a provider-level <strong>fraud, waste, and abuse (FWA) risk-ranking model</strong>
+        for auto casualty medical bills. The model analyzes five years of billing behavior across
+        multiple insurance carriers and compares providers with historical cases flagged by the
+        Special Investigations Unit (SIU).
+      </p>
 
-        <section>
-            <h2>Solution Approach</h2>
-            <p>Combined five years of billing data at the provider Tax ID level and developed behavioral features covering billing volume, pricing, procedures, geography, and timing. Compared several machine learning algorithms and selected XGBoost for the final model. The model generates provider risk scores, review tiers, and SHAP-based reasons that investigators can examine alongside the underlying bill history.</p>
-        </section>
+      <p>
+        The project used approximately <strong>806 million bill lines</strong> across more than
+        <strong>90 client accounts</strong>. It built profiles for over <strong>377,000 providers</strong>
+        and scored approximately <strong>298,000 previously unlabeled providers</strong>.
+      </p>
 
-        <section>
-            <h2>Results</h2>
-            <ul>
-                <li><strong>Strong Risk Ranking:</strong> Achieved a PR-AUC of 0.758 and ROC-AUC of 0.951 on held-out data.</li>
-                <li><strong>Focused Investigations:</strong> The top 10% of ranked providers contained 72.8% of SIU-flagged providers.</li>
-                <li><strong>Higher-Yield Worklist:</strong> The top decile had a 68.8% hit rate, representing 7.3× lift over the sample baseline.</li>
-                <li><strong>Explainable Review:</strong> Each score included reasons to help investigators assess potential billing concerns.</li>
-            </ul>
-        </section>
+      <p>
+        Each scored provider receives a risk probability, a review tier, and the
+        <strong>10 strongest reasons</strong> contributing to the score. Investigators use these
+        outputs to decide which providers warrant closer examination.
+      </p>
+    </section>
 
-        <section>
-            <h2>Challenges</h2>
-            <p>Key challenges included inconsistent provider identifiers, missing data, class imbalance, and the possibility that some unflagged providers had not yet been investigated. The project also required controls to reduce overfitting and ensure the model’s scores reflected provider behavior rather than differences in carrier workflows.</p>
-        </section>
+    <section>
+      <h2>Key Features</h2>
 
-        <section>
-            <h2>Future Work</h2>
-            <p>Future improvements include using completed investigation outcomes as new training labels, expanding carrier-level data quality checks, and monitoring model performance as billing patterns change. Investigator feedback can also help refine risk tiers and make the worklist more useful over time.</p>
-        </section>
+      <div class="grid">
+        <div class="card">
+          <h3>Cross-Carrier Provider View</h3>
+          <p>
+            Combines billing activity from multiple carriers to reveal provider patterns
+            that may be difficult to see within one insurer's data.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Provider Risk Scoring</h3>
+          <p>
+            Assigns a model score to each provider based on historical billing behavior
+            and its similarity to SIU-flagged providers.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Investigation Tiers</h3>
+          <p>
+            Organizes providers into High, Elevated, Low, and No Risk tiers to support
+            investigation planning and worklist prioritization.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Explainable Reason Codes</h3>
+          <p>
+            Uses SHAP to identify the main billing features influencing each provider's
+            score and gives investigators a starting point for review.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Behavioral Feature Engineering</h3>
+          <p>
+            Captures patterns in billing volume, pricing, procedure repetition,
+            geography, attorney involvement, and timing.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Production Scoring Pipeline</h3>
+          <p>
+            Supports monthly feature rebuilding, provider scoring, run logging,
+            model versioning, and automated output checks.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Controlled Model Promotion</h3>
+          <p>
+            Checks a candidate model against held-out performance before replacing
+            the model currently used for scoring.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technologies and Tools</h2>
+
+      <div class="tech-list">
+        <div class="tech-item">
+          <strong>Programming:</strong> Python
+        </div>
+
+        <div class="tech-item">
+          <strong>Data Platform:</strong> Snowflake, SQL, Snowflake Notebooks
+        </div>
+
+        <div class="tech-item">
+          <strong>Modeling:</strong> XGBoost, LightGBM, HistGradientBoosting,
+          Random Forest, Logistic Regression
+        </div>
+
+        <div class="tech-item">
+          <strong>Explainability:</strong> SHAP-based provider reason codes
+        </div>
+
+        <div class="tech-item">
+          <strong>Feature Engineering:</strong> Provider-level billing,
+          pricing, procedure, geographic, and timing measures
+        </div>
+
+        <div class="tech-item">
+          <strong>Model Evaluation:</strong> PR-AUC, ROC-AUC, top-decile hit rate,
+          capture rate, and lift
+        </div>
+
+        <div class="tech-item">
+          <strong>Model Development:</strong> Stratified sampling,
+          5-fold cross-validation, and randomized hyperparameter search
+        </div>
+
+        <div class="tech-item">
+          <strong>Model Operations:</strong> Snowflake Model Registry,
+          version aliases, run logging, and output quality checks
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Problem Statement</h2>
+
+      <p>
+        SIU teams had to review a large provider population with limited investigative
+        capacity. Suspicious billing could be identified only after substantial payments,
+        while manual review offered no consistent way to decide which providers should
+        be investigated first.
+      </p>
+
+      <p>
+        A provider may bill several insurance carriers. Looking at one carrier at a time
+        can miss unusual patterns in the provider's overall activity. The business needed
+        a cross-carrier risk signal that could focus investigators on promising leads
+        while showing the billing behavior behind each recommendation.
+      </p>
+    </section>
+
+    <section>
+      <h2>Solution Approach</h2>
+
+      <p>
+        Built a supervised classification model at the <strong>provider Tax ID (TIN)</strong>
+        level. TIN aligned with SIU case handling and provided more complete provider
+        coverage than National Provider Identifier (NPI), which was missing for a
+        substantial portion of the population.
+      </p>
+
+      <ul>
+        <li>
+          <strong>Training Population:</strong> Used all 7,507 SIU-flagged providers
+          and a stratified sample of 71,837 not-flagged providers. Sampling accounted
+          for customer, provider type, and claim volume.
+        </li>
+
+        <li>
+          <strong>Label Quality:</strong> Applied additional exclusions for providers
+          suspected of wrongdoing, including matches to public fraud and exclusion lists,
+          to reduce contamination of the not-flagged group.
+        </li>
+
+        <li>
+          <strong>Feature Development:</strong> Created 203 behavioral features in
+          15 groups. Converted detailed billing codes into measures such as procedure
+          concentration, diversity, and share of activity.
+        </li>
+
+        <li>
+          <strong>Feature Selection:</strong> Applied missing-value, constant-value,
+          and collinearity checks. Tested 17 feature-set configurations and selected
+          104 features for the final model.
+        </li>
+
+        <li>
+          <strong>Model Selection:</strong> Compared five algorithm families and
+          selected XGBoost. Tuning included a train-validation performance-gap
+          constraint to reduce overfitting.
+        </li>
+
+        <li>
+          <strong>Investigator Output:</strong> Registered the model in Snowflake,
+          scored unlabeled providers, assigned risk tiers, and stored SHAP-based
+          reasons with the provider scores.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Results &amp; Business Impact</h2>
+
+      <ul>
+        <li>
+          <strong>PR-AUC:</strong> Achieved <strong>0.758</strong>, compared with
+          a <strong>0.095</strong> flagged-provider rate in the evaluation sample.
+        </li>
+
+        <li>
+          <strong>ROC-AUC:</strong> Achieved <strong>0.951</strong> on held-out data,
+          indicating strong separation between flagged and not-flagged providers.
+        </li>
+
+        <li>
+          <strong>Top-Decile Hit Rate:</strong> <strong>68.8%</strong> of providers
+          in the highest-scoring 10% were SIU-flagged, equivalent to
+          <strong>7.3× lift</strong> over the sample baseline.
+        </li>
+
+        <li>
+          <strong>Top-Decile Capture:</strong> The highest-scoring 10% contained
+          <strong>72.8%</strong> of all SIU-flagged providers in the evaluation set.
+        </li>
+
+        <li>
+          <strong>Top-20% Capture:</strong> The highest-scoring 20% contained
+          <strong>89.5%</strong> of SIU-flagged providers.
+        </li>
+
+        <li>
+          <strong>Improvement Over Prior Model:</strong> PR-AUC increased from
+          <strong>0.719 to 0.758</strong>, an approximately
+          <strong>5.5% relative improvement</strong>.
+        </li>
+      </ul>
+
+      <div class="impact-box">
+        <h3>Business Value</h3>
+        <p>
+          The model gives SIU teams an explainable, prioritized provider worklist.
+          It helps investigators concentrate limited review capacity on providers
+          whose billing patterns warrant closer examination across carriers.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Challenges</h2>
+
+      <ul>
+        <li>
+          <strong>Incomplete Provider Identifiers:</strong> NPI was missing for
+          approximately 33% of providers, so the model used TIN as the provider
+          unit for training and investigation.
+        </li>
+
+        <li>
+          <strong>Uncertain Negative Labels:</strong> A provider without an SIU flag
+          is not necessarily free of FWA. Additional exclusions reduced the risk
+          of treating suspected providers as clean training examples.
+        </li>
+
+        <li>
+          <strong>Class Imbalance:</strong> The sampled not-flagged group was about
+          9.6 times the flagged group. Model development accounted for this
+          imbalance during training and evaluation.
+        </li>
+
+        <li>
+          <strong>Sampling Bias:</strong> Stratified sampling helped represent
+          different customers, provider types, and claim volumes without allowing
+          sampling choices to become a model signal.
+        </li>
+
+        <li>
+          <strong>Cross-Carrier Data Quality:</strong> Addressed bill and claimant
+          identifier collisions across customers and checked whether differences
+          in carrier workflows could distort provider features.
+        </li>
+
+        <li>
+          <strong>Actionable Explanations:</strong> Used provider-level SHAP reasons
+          so investigators could connect elevated scores to billing patterns
+          visible in the underlying records.
+        </li>
+      </ul>
+    </section>
+
+    <div class="footer-note">
+      <strong>Positioning Note:</strong>
+      This model is an investigation-prioritization tool. An elevated score
+      identifies a provider for closer review; it does not establish fraud.
+      SIU investigators assess the underlying records and make final decisions.
     </div>
+
+  </div>
 </body>
 </html>
