@@ -3,121 +3,614 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AdvisorFit recruitment decision-support case study: propensity modelling, recruiter-assistance agent workflows and candidate PDF reports." />
   <title>AdvisorFit — AI-Powered Recruitment Intelligence</title>
+
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, Helvetica, sans-serif; background: #f4f6f8; color: #1f2937; line-height: 1.6; }
-    .container { max-width: 1100px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.08); border-top: 8px solid #febe10; }
-    h1 { font-size: 34px; color: #003b5c; margin-bottom: 12px; line-height: 1.2; }
-    .subtitle { font-size: 17px; color: #4b5563; margin-bottom: 32px; max-width: 900px; }
-    section { margin-bottom: 34px; padding: 24px; border-radius: 16px; background: #f9fafb; border-left: 6px solid #febe10; }
-    h2 { font-size: 24px; color: #003b5c; margin-bottom: 14px; }
-    p { font-size: 16px; margin-bottom: 12px; color: #374151; }
-    ul { padding-left: 20px; margin-top: 10px; }
-    li { margin-bottom: 10px; font-size: 16px; color: #374151; }
-    strong { color: #003b5c; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-top: 18px; }
-    .card { background: #fff; padding: 18px; border-radius: 14px; border: 1px solid #e5e7eb; box-shadow: 0 4px 14px rgba(0,0,0,.04); }
-    .card h3 { font-size: 18px; color: #003b5c; margin-bottom: 8px; }
-    .card p { font-size: 15px; margin-bottom: 0; }
-    .tech-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 14px; }
-    .tech-item { background: #fff; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; font-size: 15px; }
-    .impact-box { background: #003b5c; color: #fff; padding: 22px; border-radius: 16px; margin-top: 18px; }
-    .impact-box h3 { color: #febe10; font-size: 20px; margin-bottom: 10px; }
-    .impact-box p { color: #fff; margin-bottom: 0; }
-    .impact-box strong { color: #febe10; }
-    .footer-note { margin-top: 30px; padding: 18px; border-radius: 12px; background: #fff8db; border: 1px solid #f3d66b; color: #374151; font-size: 15px; }
-    @media (max-width: 768px) { .container { margin: 20px; padding: 24px; } h1 { font-size: 28px; } h2 { font-size: 21px; } section { padding: 18px; } }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f6f8;
+      color: #1f2937;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 40px;
+      background: #fff;
+      border-radius: 18px;
+      border-top: 8px solid #febe10;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      color: #003b5c;
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      max-width: 900px;
+      margin-bottom: 18px;
+      color: #4b5563;
+      font-size: 17px;
+    }
+
+    .author {
+      margin-bottom: 18px;
+      color: #4b5563;
+      font-size: 15px;
+    }
+
+    .status {
+      margin-bottom: 30px;
+      padding: 14px 18px;
+      background: #fff8db;
+      border: 1px solid #f3d66b;
+      border-radius: 12px;
+    }
+
+    section {
+      margin-bottom: 30px;
+      padding: 24px;
+      background: #f9fafb;
+      border-left: 6px solid #febe10;
+      border-radius: 16px;
+    }
+
+    h2 {
+      margin-bottom: 14px;
+      color: #003b5c;
+      font-size: 24px;
+    }
+
+    h3 {
+      margin-bottom: 8px;
+      color: #003b5c;
+      font-size: 18px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #374151;
+      font-size: 16px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    strong {
+      color: #003b5c;
+    }
+
+    ul,
+    ol {
+      margin-top: 10px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin-bottom: 12px;
+      color: #374151;
+      font-size: 16px;
+    }
+
+    li:last-child {
+      margin-bottom: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      padding: 18px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .card p {
+      font-size: 15px;
+    }
+
+    .metric {
+      display: block;
+      margin-bottom: 6px;
+      color: #003b5c;
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1.2;
+    }
+
+    .label {
+      display: block;
+      margin-bottom: 8px;
+      color: #003b5c;
+      font-weight: bold;
+    }
+
+    .tech-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .tech-item {
+      padding: 14px;
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 15px;
+    }
+
+    .impact-box {
+      margin-top: 18px;
+      padding: 22px;
+      background: #003b5c;
+      border-radius: 16px;
+    }
+
+    .impact-box h3,
+    .impact-box strong {
+      color: #febe10;
+    }
+
+    .impact-box p {
+      color: #fff;
+    }
+
+    .footer-note {
+      padding: 18px;
+      background: #fff8db;
+      border: 1px solid #f3d66b;
+      border-radius: 12px;
+      color: #374151;
+      font-size: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 16px;
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 21px;
+      }
+
+      section {
+        padding: 18px;
+      }
+
+      .grid,
+      .tech-list {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
+
 <body>
   <main class="container">
-    <h1>AdvisorFit — AI-Powered Recruitment Intelligence</h1>
-    <p class="subtitle">A top performer propensity model and candidate reporting platform that turns recruitment-stage information into practical guidance for financial advisor recruiters.</p>
+    <header>
+      <h1>AdvisorFit — AI-Powered Recruitment Intelligence</h1>
+
+      <p class="subtitle">
+        A recruitment decision-support platform combining propensity
+        modelling and a recruiter-assistance agent to deliver
+        candidate-specific PDF reports to Recruit Managers.
+      </p>
+
+      <p class="author">
+        <strong>Manish Saroha</strong> · Senior Data Specialist ·
+        Sun Life Global Solutions
+      </p>
+
+      <div class="status">
+        <strong>Current status:</strong> Pilot.
+        <strong>Production rollout:</strong> Planned for January 2027.
+      </div>
+    </header>
 
     <section>
       <h2>Project Overview</h2>
-      <p>Developed <strong>AdvisorFit</strong> for Sun Life Philippines to identify financial advisor candidates with a higher likelihood of becoming top performers. The project combined historical recruitment and performance data, supervised machine learning, business outcome validation, and AI-generated candidate reports.</p>
-      <p>A curated dataset of approximately <strong>15,150 historical applications</strong> supported model development. The solution scores candidates using information available during recruitment, then presents the results as propensity scores, decile rankings, and recruiter-friendly guidance.</p>
-      <p>AdvisorFit was designed as a <strong>decision-support platform</strong>: recruiters use its signals to prioritize conversations, investigate candidate strengths and concerns, and plan early coaching. Final hiring decisions remain with Recruit Managers and business leaders.</p>
+
+      <p>
+        Independently built <strong>AdvisorFit</strong> using
+        <strong>15,150 historical applications</strong>, owning
+        stakeholder requirements, engineering implementation and
+        pilot delivery.
+      </p>
+
+      <p>
+        The platform helps Recruit Managers prioritise candidates
+        using propensity scores and actionable reports. A
+        recruiter-assistance agent combines candidate profiles and
+        model scores to highlight strengths, concerns and suggested
+        interview questions before the interview call.
+      </p>
+
+      <p>
+        Candidate-scoring, PDF generation and delivery are integrated
+        into agent workflows. The final output is a
+        <strong>candidate-specific PDF report</strong> delivered to
+        the respective Recruit Manager for review and interview
+        preparation.
+      </p>
     </section>
 
     <section>
-      <h2>Key Features</h2>
+      <h2>Business Problem</h2>
+
+      <p>
+        Recruit Managers needed to review application information,
+        speak with candidates and reach a hiring decision. They needed
+        a consistent way to prioritise conversations and identify
+        relevant questions before each interview.
+      </p>
+
+      <p>
+        AdvisorFit brings candidate information, predicted
+        top-performer propensity and interview guidance into one
+        report, helping managers focus their review and candidate
+        conversations.
+      </p>
+    </section>
+
+    <section>
+      <h2>My Contribution</h2>
+
+      <ul>
+        <li>
+          <strong>End-to-End Ownership:</strong>
+          Independently owned stakeholder requirements, engineering
+          implementation and pilot delivery.
+        </li>
+
+        <li>
+          <strong>Data Engineering:</strong>
+          Developed SQL pipelines integrating candidate profiles,
+          employment, education, relationships and free-text
+          responses into consistent recruitment-stage inputs.
+        </li>
+
+        <li>
+          <strong>Model Development:</strong>
+          Evaluated CatBoost and XGBoost to generate propensity
+          scores and rank candidates.
+        </li>
+
+        <li>
+          <strong>Agent Development:</strong>
+          Built a recruiter-assistance agent combining candidate
+          profiles and propensity scores to highlight strengths,
+          concerns and suggested interview questions.
+        </li>
+
+        <li>
+          <strong>Tool Integration and Reporting:</strong>
+          Integrated candidate scoring, PDF generation and report
+          delivery into agent workflows.
+        </li>
+
+        <li>
+          <strong>Business Validation:</strong>
+          Assessed score rankings against sales and retention
+          outcomes and developed a scenario-based AFYP business case.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Key Capabilities</h2>
+
       <div class="grid">
-        <div class="card"><h3>Top Performer Propensity</h3><p>Estimates a candidate's likelihood of becoming a top-performing advisor from recruitment-stage profile and background data.</p></div>
-        <div class="card"><h3>Business Decile Ranking</h3><p>Groups candidates by model score so recruiters can identify higher-potential candidates without interpreting raw model outputs.</p></div>
-        <div class="card"><h3>Recruitment Text Signals</h3><p>Structures open-ended responses into features reflecting ambition, achievements, entrepreneurship, leadership, and career goals.</p></div>
-        <div class="card"><h3>Outcome Validation</h3><p>Compares score groups with early sales, first-year production, and 13-month retention to test whether rankings align with business results.</p></div>
-        <div class="card"><h3>AI Candidate Reports</h3><p>Uses structured candidate context and Claude Sonnet to draft summaries, positive signals, validation areas, interview questions, and guidance.</p></div>
-        <div class="card"><h3>Human Review</h3><p>Keeps recruiter judgment central and checks generated observations against the candidate's actual information.</p></div>
-        <div class="card"><h3>Pilot Batch Workflow</h3><p>Designed for weekly batch scoring and report generation for active candidates in the Lead-Based Platform (LBP).</p></div>
+        <div class="card">
+          <h3>Candidate Propensity Scoring</h3>
+          <p>
+            Uses recruitment-stage information to estimate a
+            candidate’s likelihood of becoming a top-performing
+            advisor.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Decile Ranking</h3>
+          <p>
+            Groups candidates by model score to support
+            prioritisation of recruitment conversations.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Recruiter-Assistance Agent</h3>
+          <p>
+            Combines candidate profiles and model scores to
+            highlight strengths, concerns and interview questions.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Candidate PDF Reports</h3>
+          <p>
+            Presents candidate information, scores and interview
+            guidance in a PDF delivered to the respective
+            Recruit Manager.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Recruitment-Stage Inputs</h3>
+          <p>
+            Integrates profile, employment, education, relationship
+            and free-text data while excluding post-hire outcomes
+            from scoring inputs.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Business Outcome Analysis</h3>
+          <p>
+            Assesses rankings against 90-day sales, 12-month AFYP
+            and 13-month retention.
+          </p>
+        </div>
       </div>
     </section>
 
     <section>
-      <h2>Technologies and Tools</h2>
-      <div class="tech-list">
-        <div class="tech-item"><strong>Programming and Data:</strong> Python, SQL, Pandas, NumPy</div>
-        <div class="tech-item"><strong>Machine Learning:</strong> CatBoost (selected), XGBoost, LightGBM, AutoML experiments</div>
-        <div class="tech-item"><strong>Evaluation:</strong> ROC-AUC, top-decile lift, cohort analysis, confidence intervals, hypothesis testing</div>
-        <div class="tech-item"><strong>Feature Engineering:</strong> Candidate profiles, categorical variables, structured recruitment-text signals</div>
-        <div class="tech-item"><strong>Visualization:</strong> Matplotlib, Plotly, business presentation charts</div>
-        <div class="tech-item"><strong>Cloud and Storage:</strong> AWS S3, AWS Bedrock</div>
-        <div class="tech-item"><strong>Generative AI:</strong> Anthropic Claude Sonnet, prompt engineering, report quality review</div>
-        <div class="tech-item"><strong>Interface:</strong> Streamlit candidate report prototype</div>
+      <h2>Candidate-to-Report Workflow</h2>
+
+      <ol>
+        <li>
+          <strong>Prepare Candidate Data:</strong>
+          Integrate recruitment-stage information through SQL
+          pipelines. Insufficient candidate data can prevent
+          report generation.
+        </li>
+
+        <li>
+          <strong>Generate Candidate Scores:</strong>
+          Use the propensity model to produce candidate scores
+          and decile rankings.
+        </li>
+
+        <li>
+          <strong>Generate Interview Guidance:</strong>
+          Combine candidate profiles and scores through the
+          recruiter-assistance agent to highlight strengths,
+          concerns and suggested interview questions.
+        </li>
+
+        <li>
+          <strong>Create the PDF:</strong>
+          Assemble candidate information, model outputs and
+          interview guidance into a candidate-specific PDF.
+        </li>
+
+        <li>
+          <strong>Deliver for Manager Review:</strong>
+          Deliver the generated report to the respective
+          Recruit Manager before the interview.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Pilot Operating Results</h2>
+
+      <div class="grid">
+        <div class="card">
+          <span class="metric">~100</span>
+          <span class="label">Candidate reports per month</span>
+          <p>
+            Approximate PDF report volume during the pilot.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="metric">~3 minutes</span>
+          <span class="label">Processing time per report</span>
+          <p>
+            Approximate time for candidate scoring and report
+            generation.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="metric">95%</span>
+          <span class="label">Report-generation rate</span>
+          <p>
+            Reports are generated for approximately 95% of
+            attempted candidates. Insufficient candidate data
+            blocks the remaining 5%.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="metric">~2 hours</span>
+          <span class="label">Reported saving per candidate</span>
+          <p>
+            Pilot managers report this approximate saving across
+            preparation, interviewing and decision-making.
+          </p>
+        </div>
       </div>
+
+      <p style="margin-top: 18px;">
+        Time savings are based on pilot-manager feedback.
+        The 95% figure measures report generation, not independently
+        measured delivery reliability.
+      </p>
     </section>
 
     <section>
-      <h2>Problem Statement</h2>
-      <p>Recruitment teams had limited structured evidence at the application stage to distinguish candidates who might become successful advisors. Decisions depended heavily on individual recruiter experience, making large candidate pipelines difficult to prioritize consistently.</p>
-      <p>The business needed a way to combine available candidate information into an interpretable signal, test that signal against actual advisor outcomes, and give recruiters concrete questions to explore during interviews.</p>
+      <h2>Historical Model Evaluation</h2>
+
+      <p>
+        Evaluated <strong>CatBoost and XGBoost</strong>.
+        In the historical evaluation, the highest-scoring decile
+        had a higher top-performer rate than the overall baseline.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <span class="metric">27.8%</span>
+          <span class="label">Top-decile top-performer rate</span>
+          <p>
+            Historical top-performer rate among candidates in
+            the highest-scoring 10%.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="metric">13.6%</span>
+          <span class="label">Baseline top-performer rate</span>
+          <p>
+            Overall top-performer rate used as the comparison
+            baseline in the historical evaluation.
+          </p>
+        </div>
+
+        <div class="card">
+          <span class="metric">2.04×</span>
+          <span class="label">Top-decile lift</span>
+          <p>
+            The highest-scoring decile’s historical top-performer
+            rate was approximately 2.04 times the baseline.
+          </p>
+        </div>
+      </div>
+
+      <p style="margin-top: 18px;">
+        These figures describe historical model performance.
+        They do not demonstrate a realised improvement in
+        recruitment outcomes during the pilot.
+      </p>
     </section>
 
     <section>
-      <h2>Solution Approach</h2>
-      <p>Built SQL-based pipelines to combine candidate profiles, employment and education histories, questionnaire responses, sales production, performance categories, and advisor status. The model used only information available at recruitment time; future performance, post-hire attributes, direct identifiers, and other leakage-prone fields were excluded from scoring inputs.</p>
-      <ul>
-        <li><strong>Model Development:</strong> Benchmarked CatBoost, XGBoost, LightGBM, and AutoML experiments, selecting the final model based on ranking performance, stability, and usability.</li>
-        <li><strong>Business Interpretation:</strong> Converted model scores into candidate deciles and higher, medium, and lower potential groups for recruiter use.</li>
-        <li><strong>Sales Validation:</strong> Examined first 90-day AFYP, policy count, and days to first sale, alongside first 12-month production.</li>
-        <li><strong>Retention Validation:</strong> Analyzed 13-month retention and cancellation using agreed advisor status definitions, including Active, Cancelled, Deceased, and Vested.</li>
-        <li><strong>Report Generation:</strong> Used AWS Bedrock and Claude Sonnet to turn structured scores and candidate facts into readable reports with interview focus areas and recommendations.</li>
-        <li><strong>Pilot Design:</strong> Planned batch scoring of active LBP candidates and Recruit Manager-specific report delivery as an initial operating model.</li>
-      </ul>
+      <h2>Business Outcome Validation</h2>
+
+      <p>
+        Analysed score rankings against
+        <strong>90-day sales</strong>,
+        <strong>12-month AFYP</strong> and
+        <strong>13-month retention</strong> using hypothesis tests
+        and confidence intervals.
+      </p>
+
+      <p>
+        Communicated findings, assumptions and limitations to help
+        stakeholders assess whether the rankings were relevant
+        to business outcomes.
+      </p>
     </section>
 
     <section>
-      <h2>Results &amp; Business Impact</h2>
-      <ul>
-        <li><strong>Top-Decile Lift:</strong> The highest-scoring decile achieved approximately <strong>2.04× lift</strong> over the overall top performer rate.</li>
-        <li><strong>Candidate Separation:</strong> Approximately <strong>27.8%</strong> of candidates in the highest-scoring decile became top performers, compared with an overall rate of approximately <strong>13.6%</strong>.</li>
-        <li><strong>Early Sales Alignment:</strong> Higher model-score groups showed stronger first 90-day AFYP and policy production than lower-scoring groups.</li>
-        <li><strong>Retention Insight:</strong> Stronger early and first-year sales performance was associated with better 13-month retention and lower cancellation.</li>
-        <li><strong>AFYP Opportunity Scenario:</strong> A replacement analysis estimated approximately <strong>37M in additional AFYP</strong> if candidates in deciles 5–10 were replaced by previously uncoded candidates in the top-performing deciles 1–5 who also met the good-retention criteria. This is a modeled opportunity, not realized revenue.</li>
-        <li><strong>Recruiter Guidance:</strong> Candidate reports translated model signals into strengths, validation areas, and interview questions that managers could act on.</li>
-        <li><strong>Pilot Direction:</strong> Defined a batch-service approach for active LBP candidates, with broader application integration considered after pilot validation.</li>
-      </ul>
+      <h2>Scenario-Based Business Case</h2>
+
+      <p>
+        Modelled a potential <strong>CAD 37M AFYP uplift</strong>
+        through what-if analysis, providing stakeholders with a
+        quantified business case and documented candidate-selection
+        assumptions.
+      </p>
+
       <div class="impact-box">
-        <h3>Business Value</h3>
-        <p>AdvisorFit helps recruiters focus attention on promising candidates and examine specific uncertainties during interviews. The replacement analysis identified a potential <strong>37M AFYP uplift</strong> under its candidate-selection and retention assumptions; actual gains require pilot validation.</p>
+        <h3>Potential Opportunity</h3>
+        <p>
+          The <strong>CAD 37M AFYP uplift</strong> is a projected
+          scenario requiring pilot validation. It is not realised
+          revenue or an established production result.
+        </p>
       </div>
     </section>
 
     <section>
-      <h2>Challenges</h2>
-      <ul>
-        <li><strong>Data Leakage:</strong> Excluded performance outcomes, target categories, post-recruitment attributes, and identifiers that could overstate predictive quality.</li>
-        <li><strong>Feature Consistency:</strong> Managed missing values, unknown categories, high-cardinality fields, and text-derived signals across historical and current candidates.</li>
-        <li><strong>Metric Alignment:</strong> Reconciled first 3-month and first 12-month AFYP calculations and confirmed the business definitions behind performance categories.</li>
-        <li><strong>Retention Logic:</strong> Aligned advisor status definitions before interpreting 13-month retention and cancellation trends.</li>
-        <li><strong>Generated Report Quality:</strong> Refined prompts and reviewed reports to reduce unsupported claims, contradictions, and generic recommendations.</li>
-        <li><strong>Operational Fit:</strong> Assessed batch delivery, LBP integration, and enterprise application options against cost, dependencies, and recruiter workflows.</li>
-      </ul>
+      <h2>Technologies and Capabilities</h2>
+
+      <div class="tech-list">
+        <div class="tech-item">
+          <strong>Data Engineering:</strong>
+          SQL pipelines, candidate-data integration and
+          recruitment-stage feature preparation.
+        </div>
+
+        <div class="tech-item">
+          <strong>Machine Learning:</strong>
+          CatBoost, XGBoost, propensity modelling and decile ranking.
+        </div>
+
+        <div class="tech-item">
+          <strong>Agent Workflows:</strong>
+          Recruiter-assistance agent, candidate-scoring tools
+          and report-generation integration.
+        </div>
+
+        <div class="tech-item">
+          <strong>Reporting:</strong>
+          Candidate-specific PDF generation and delivery
+          to Recruit Managers.
+        </div>
+
+        <div class="tech-item">
+          <strong>Statistical Evaluation:</strong>
+          Hypothesis tests, confidence intervals, top-decile lift
+          and sales and retention analysis.
+        </div>
+
+        <div class="tech-item">
+          <strong>Business Delivery:</strong>
+          Stakeholder requirements, independent implementation,
+          pilot delivery and what-if scenario analysis.
+        </div>
+      </div>
     </section>
 
-    <div class="footer-note"><strong>Positioning Note:</strong> AdvisorFit supports candidate prioritization and interview preparation. Its score is a predictive signal, not a guarantee of future performance or an automated hiring decision. Recruit Managers and business leaders retain final judgment.</div>
+    <section>
+      <h2>Current Status and Next Milestone</h2>
+
+      <p>
+        AdvisorFit is currently <strong>in pilot</strong>,
+        with <strong>production rollout planned for January 2027</strong>.
+      </p>
+
+      <p>
+        Pilot operating metrics and manager feedback are available.
+        Actual improvements in recruitment, sales and retention
+        outcomes remain to be established.
+      </p>
+    </section>
+
+    <footer class="footer-note">
+      <strong>Decision-Support Note:</strong>
+      AdvisorFit supports candidate prioritisation and interview
+      preparation. Model scores are predictive signals, not
+      guarantees of future performance. Recruit Managers and
+      business leaders retain final hiring judgment. Time savings
+      are manager-reported, model results reflect historical
+      evaluation, and projected AFYP uplift requires validation.
+    </footer>
   </main>
 </body>
 </html>
